@@ -33,6 +33,7 @@
                     <a href="#home" class="hover:text-blue-400 transition-colors">Home</a>
                     <a href="#about" class="hover:text-blue-400 transition-colors">About</a>
                     <a href="#services" class="hover:text-blue-400 transition-colors">Services</a>
+                    <a href="#reviews" class="hover:text-blue-400 transition-colors">Reviews</a>
                     <a href="#contact" class="hover:text-blue-400 transition-colors">Contact</a>
                 </div>
 
@@ -51,6 +52,7 @@
                 <a href="#home" class="mobile-link block px-3 py-2 text-base font-medium hover:bg-slate-800 rounded-md">Home</a>
                 <a href="#about" class="mobile-link block px-3 py-2 text-base font-medium hover:bg-slate-800 rounded-md">About</a>
                 <a href="#services" class="mobile-link block px-3 py-2 text-base font-medium hover:bg-slate-800 rounded-md">Services</a>
+                <a href="#reviews" class="mobile-link block px-3 py-2 text-base font-medium hover:bg-slate-800 rounded-md">Reviews</a>
                 <a href="#contact" class="mobile-link block px-3 py-2 text-base font-medium hover:bg-slate-800 rounded-md">Contact</a>
             </div>
         </div>
@@ -60,7 +62,6 @@
     <section id="home" class="relative flex flex-col md:flex-row min-h-[85vh]">
         <!-- Left Side (Dark) -->
         <div class="bg-[#0B1B3D] text-white w-full md:w-1/2 flex flex-col justify-center px-8 md:px-16 lg:px-24 py-16 relative overflow-hidden">
-            <!-- Subtle Background Accent -->
             <div class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-blue-600 rounded-full opacity-10 blur-3xl"></div>
             
             <div class="relative z-10 space-y-6">
@@ -108,8 +109,8 @@
         <div class="bg-white w-full md:w-1/2 flex flex-col justify-center px-8 md:px-16 lg:px-24 py-16 relative">
             <div class="space-y-8 relative z-10">
                 <div>
-                    <h2 class="text-4xl sm:text-5xl font-bold text-slate-900 mb-2">Erfan Emil</h2>
-                    <h2 class="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">bin Sarifudin</h2>
+                    <!-- REMOVED: bin Sarifudin -->
+                    <h2 class="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">Erfan Emil</h2>
                     
                     <div class="h-1 w-20 bg-blue-600 mb-6 rounded-full"></div>
                     
@@ -161,25 +162,20 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col lg:flex-row gap-16 items-center">
                 
-                <!-- Image Side -->
-                <div class="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/4 xl:w-1/5 mx-auto">⁠
-
+                <div class="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/4 xl:w-1/5 mx-auto">
                     <div class="relative">
-                        <!-- Decorative background shape -->
                         <div class="absolute -inset-4 bg-gradient-to-r from-blue-500 to-cyan-400 opacity-30 rounded-[2rem] transform rotate-3"></div>
-<div class="absolute -inset-4 bg-gradient-to-r from-purple-500 to-blue-500 opacity-30 rounded-[2rem] transform -rotate-3"></div>
+                        <div class="absolute -inset-4 bg-gradient-to-r from-purple-500 to-blue-500 opacity-30 rounded-[2rem] transform -rotate-3"></div>
                         
-                        <!-- REPLACE the src="..." inside this image tag with your actual image filename later (e.g., src="profile.png") -->
                         <img 
                             src="ac8240d3-aee7-4c22-bfc0-781985b8eb57.jpeg" 
                             alt="Erfan Emil Profile" 
                             class="relative z-10 rounded-2xl shadow-xl w-full object-cover aspect-[4/5]"
-                            onerror="this.src='https://via.placeholder.com/400x500/0B1B3D/FFFFFF?text=Erfan+Emil'"
+                            onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop'"
                         />
                     </div>
                 </div>
 
-                <!-- Text Side -->
                 <div class="w-full lg:w-7/12">
                     <h3 class="text-blue-600 font-semibold tracking-wide uppercase text-sm mb-2">About Me</h3>
                     <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6">Accounting Student & Tech Enthusiast</h2>
@@ -193,14 +189,14 @@
                             I currently work part-time in the IT sector, bridging the gap between my studies and real-world tech solutions. Whether it's developing websites, writing Python scripts to automate boring tasks, or troubleshooting systems, I love solving problems.
                         </p>
                         
-                        <!-- The "Worth It" Pricing Block -->
                         <div class="bg-blue-50 border-l-4 border-blue-600 p-6 my-8 rounded-r-xl">
                             <h4 class="text-xl font-bold text-[#0B1B3D] mb-2 flex items-center">
                                 <i class="ph ph-check-circle text-blue-600 mr-2 text-2xl"></i>
                                 High Value, Competitive Rates
                             </h4>
+                            <!-- EDITED: New confident text -->
                             <p class="text-slate-700 text-base">
-                                Because I am actively looking to build my portfolio with fresh, real-world projects, I offer highly competitive pricing. You get the dedicated attention and quality of a passionate developer, ensuring that the final product is truly worth your investment.
+                                I am actively building my professional portfolio with fresh, real-world projects, allowing me to offer highly competitive pricing. You get the dedicated attention and quality of a passionate developer, ensuring that the final product is truly worth your investment.
                             </p>
                         </div>
                     </div>
@@ -233,7 +229,9 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-lg transition-shadow group">
+                <!-- Web Dev Card -->
+                <div onclick="openModal('Website Development', 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop', 'Modern, responsive and user-friendly websites designed to grow your business and establish your digital presence.')" 
+                     class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-lg hover:-translate-y-2 transition-all duration-300 group cursor-pointer">
                     <div class="w-14 h-14 bg-[#0B1B3D] text-blue-400 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                         <i class="ph ph-globe text-3xl"></i>
                     </div>
@@ -243,7 +241,9 @@
                     </p>
                 </div>
 
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-lg transition-shadow group">
+                <!-- Python Card -->
+                <div onclick="openModal('Python Programming', 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?q=80&w=1200&auto=format&fit=crop', 'Custom Python solutions, scripting, and automation. I can help streamline your daily workflows and process data efficiently.')" 
+                     class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-lg hover:-translate-y-2 transition-all duration-300 group cursor-pointer">
                     <div class="w-14 h-14 bg-[#0B1B3D] text-blue-400 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                         <i class="ph ph-code text-3xl"></i>
                     </div>
@@ -253,7 +253,9 @@
                     </p>
                 </div>
 
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-lg transition-shadow group">
+                <!-- IT Services Card -->
+                <div onclick="openModal('IT Services & Support', 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop', 'Comprehensive troubleshooting, system setup, hardware/software maintenance, and technical support to keep you running smoothly.')" 
+                     class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-lg hover:-translate-y-2 transition-all duration-300 group cursor-pointer">
                     <div class="w-14 h-14 bg-[#0B1B3D] text-blue-400 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                         <i class="ph ph-monitor text-3xl"></i>
                     </div>
@@ -263,6 +265,100 @@
                     </p>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Customer Reviews Section -->
+    <section id="reviews" class="py-24 bg-white border-t border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center mb-16">
+                <h3 class="text-blue-600 font-semibold tracking-wide uppercase text-sm mb-2">Testimonials</h3>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900">What People Say</h2>
+                <div class="mt-4 mx-auto w-16 h-1 bg-blue-600 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Review 1 -->
+                <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 relative">
+                    <div class="flex text-yellow-400 mb-4 space-x-1">
+                        <i class="ph-fill ph-star text-lg"></i>
+                        <i class="ph-fill ph-star text-lg"></i>
+                        <i class="ph-fill ph-star text-lg"></i>
+                        <i class="ph-fill ph-star text-lg"></i>
+                        <i class="ph-fill ph-star text-lg"></i>
+                    </div>
+                    <p class="text-slate-700 leading-relaxed mb-6 italic">
+                        "Emil helped fix our company website that was super slow and outdated. He actually explained things in simple terms instead of using confusing tech jargon. Really recommend him if you need a site done fast and right."
+                    </p>
+                    <div class="flex items-center space-x-4 mt-auto">
+                        <div class="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-lg">
+                            AF
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-sm">Ahmad F.</h4>
+                            <p class="text-xs text-slate-500 uppercase tracking-wider">Local Business Owner</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 relative">
+                    <div class="flex text-yellow-400 mb-4 space-x-1">
+                        <i class="ph-fill ph-star text-lg"></i>
+                        <i class="ph-fill ph-star text-lg"></i>
+                        <i class="ph-fill ph-star text-lg"></i>
+                        <i class="ph-fill ph-star text-lg"></i>
+                        <i class="ph-fill ph-star text-lg"></i>
+                    </div>
+                    <p class="text-slate-700 leading-relaxed mb-6 italic">
+                        "I had this messy Excel sheet for my daily inventory that took hours to update every week. Emil wrote a Python script that literally does it in 5 seconds now. Total lifesaver for my business operations!"
+                    </p>
+                    <div class="flex items-center space-x-4 mt-auto">
+                        <div class="w-12 h-12 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center font-bold text-lg">
+                            SW
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-sm">Sarah Wong</h4>
+                            <p class="text-xs text-slate-500 uppercase tracking-wider">Retail Manager</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 relative">
+                    <div class="flex text-yellow-400 mb-4 space-x-1">
+                        <i class="ph-fill ph-star text-lg"></i>
+                        <i class="ph-fill ph-star text-lg"></i>
+                        <i class="ph-fill ph-star text-lg"></i>
+                        <i class="ph-fill ph-star text-lg"></i>
+                        <i class="ph-fill ph-star text-lg"></i>
+                    </div>
+                    <p class="text-slate-700 leading-relaxed mb-6 italic">
+                        "Very responsive and helpful. My work laptop crashed right before a big deadline and he managed to recover my files and get the software working again the exact same day. Great service, highly recommend."
+                    </p>
+                    <div class="flex items-center space-x-4 mt-auto">
+                        <div class="w-12 h-12 rounded-full bg-green-100 text-green-600 flex items-center justify-center font-bold text-lg">
+                            JL
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-sm">Jason Lee</h4>
+                            <p class="text-xs text-slate-500 uppercase tracking-wider">Freelance Designer</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Leave a Review Button -->
+            <div class="mt-16 text-center">
+                <button onclick="openReviewModal()" class="inline-flex items-center space-x-2 bg-slate-900 hover:bg-blue-600 text-white px-8 py-3.5 rounded-xl font-medium transition-colors shadow-lg hover:shadow-xl hover:-translate-y-1 transform duration-300">
+                    <i class="ph ph-pencil-simple text-xl"></i>
+                    <span>Leave a Review</span>
+                </button>
+            </div>
+
         </div>
     </section>
 
@@ -371,7 +467,84 @@
         </div>
     </footer>
 
-    <!-- Simple Script for Mobile Menu & Footer Year -->
+    <!-- ========================================== -->
+    <!-- SERVICE POP-UP (MODAL)                     -->
+    <!-- ========================================== -->
+    <div id="serviceModal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-900/60 p-4 opacity-0 transition-opacity duration-300 backdrop-blur-sm">
+        <div id="modalContent" class="relative w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-2xl transition-all scale-95">
+            <button onclick="closeModal()" class="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/80 transition-colors backdrop-blur-md cursor-pointer">
+                <i class="ph ph-x text-xl"></i>
+            </button>
+            <img id="modalImage" src="" alt="Service Image" class="h-48 sm:h-72 w-full object-cover">
+            <div class="p-8">
+                <h3 id="modalTitle" class="text-2xl font-bold text-[#0B1B3D] mb-4">Service Title</h3>
+                <div class="h-1 w-12 bg-blue-500 rounded-full mb-4"></div>
+                <p id="modalDesc" class="text-slate-600 text-lg leading-relaxed">Service description goes here.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- LEAVE A REVIEW POP-UP (MODAL)              -->
+    <!-- ========================================== -->
+    <div id="reviewFormModal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-900/60 p-4 opacity-0 transition-opacity duration-300 backdrop-blur-sm">
+        <div id="reviewModalContent" class="relative w-full max-w-lg transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-2xl transition-all scale-95 p-8">
+            
+            <button onclick="closeReviewModal()" class="absolute right-4 top-4 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 transition-colors">
+                <i class="ph ph-x text-lg"></i>
+            </button>
+            
+            <h3 class="text-2xl font-bold text-[#0B1B3D] mb-2">Write a Review</h3>
+            <p class="text-slate-500 text-sm mb-6">Share your experience! Since this site is static, submitting this will send your review directly to my WhatsApp to be featured.</p>
+
+            <form id="reviewForm" onsubmit="submitReview(event)" class="space-y-4">
+                
+                <!-- Picture Upload Button UI -->
+                <div class="flex items-center justify-center w-full mb-2">
+                    <label class="flex flex-col items-center justify-center w-20 h-20 border-2 border-slate-300 border-dashed rounded-full cursor-pointer bg-slate-50 hover:bg-slate-100 transition-colors overflow-hidden relative group">
+                        <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                            <i class="ph ph-camera text-2xl text-slate-400 group-hover:text-blue-500 transition-colors"></i>
+                            <p class="text-[10px] text-slate-500 mt-1 font-medium group-hover:text-blue-500 transition-colors">Add Photo</p>
+                        </div>
+                        <input type="file" id="reviewPic" class="hidden" accept="image/*" />
+                    </label>
+                </div>
+
+                <!-- Interactive Stars -->
+                <div class="flex justify-center space-x-2 text-yellow-400 mb-4" id="starContainer">
+                    <i class="ph-fill ph-star text-3xl cursor-pointer hover:scale-110 transition-transform" id="star-1" onclick="setRating(1)"></i>
+                    <i class="ph-fill ph-star text-3xl cursor-pointer hover:scale-110 transition-transform" id="star-2" onclick="setRating(2)"></i>
+                    <i class="ph-fill ph-star text-3xl cursor-pointer hover:scale-110 transition-transform" id="star-3" onclick="setRating(3)"></i>
+                    <i class="ph-fill ph-star text-3xl cursor-pointer hover:scale-110 transition-transform" id="star-4" onclick="setRating(4)"></i>
+                    <i class="ph-fill ph-star text-3xl cursor-pointer hover:scale-110 transition-transform" id="star-5" onclick="setRating(5)"></i>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Your Name</label>
+                        <input type="text" id="reviewName" required class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" placeholder="e.g. Ali" />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Role / Company</label>
+                        <input type="text" id="reviewRole" required class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" placeholder="e.g. Business Owner" />
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Your Review</label>
+                    <textarea id="reviewText" required rows="4" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" placeholder="Emil did a great job..."></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 flex justify-center items-center text-white font-bold py-3 rounded-lg transition-colors mt-4">
+                    <i class="ph ph-paper-plane-right mr-2 text-lg"></i>
+                    Send Review via WhatsApp
+                </button>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Scripts -->
     <script>
         // Set current year in footer
         document.getElementById('year').textContent = new Date().getFullYear();
@@ -401,7 +574,121 @@
                 icon.classList.add('ph-list');
             });
         });
+
+        // --- SERVICE POP-UP MODAL JAVASCRIPT ---
+        function openModal(title, imageSrc, desc) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalImage').src = imageSrc;
+            document.getElementById('modalDesc').innerText = desc;
+            
+            const modal = document.getElementById('serviceModal');
+            const content = document.getElementById('modalContent');
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                content.classList.remove('scale-95');
+                content.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('serviceModal');
+            const content = document.getElementById('modalContent');
+            
+            modal.classList.add('opacity-0');
+            content.classList.remove('scale-100');
+            content.classList.add('scale-95');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }, 300);
+        }
+
+        document.getElementById('serviceModal').addEventListener('click', function(event) {
+            if (event.target === this) {
+                closeModal();
+            }
+        });
+
+        // --- REVIEW MODAL JAVASCRIPT ---
+        let currentRating = 5; // Default 5 stars
+
+        function openReviewModal() {
+            const modal = document.getElementById('reviewFormModal');
+            const content = document.getElementById('reviewModalContent');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                content.classList.remove('scale-95');
+                content.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeReviewModal() {
+            const modal = document.getElementById('reviewFormModal');
+            const content = document.getElementById('reviewModalContent');
+            modal.classList.add('opacity-0');
+            content.classList.remove('scale-100');
+            content.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }, 300);
+        }
+
+        // Click outside to close review modal
+        document.getElementById('reviewFormModal').addEventListener('click', function(event) {
+            if (event.target === this) {
+                closeReviewModal();
+            }
+        });
+
+        // Handle Interactive Star Clicks
+        function setRating(stars) {
+            currentRating = stars;
+            for(let i=1; i<=5; i++) {
+                const starIcon = document.getElementById(`star-${i}`);
+                if(i <= stars) {
+                    starIcon.classList.remove('ph', 'text-slate-300');
+                    starIcon.classList.add('ph-fill', 'text-yellow-400');
+                } else {
+                    starIcon.classList.add('ph', 'text-slate-300');
+                    starIcon.classList.remove('ph-fill', 'text-yellow-400');
+                }
+            }
+        }
+
+        // Handle Form Submission -> Send to WhatsApp
+        function submitReview(event) {
+            event.preventDefault(); 
+            
+            const name = document.getElementById('reviewName').value;
+            const role = document.getElementById('reviewRole').value;
+            const text = document.getElementById('reviewText').value;
+
+            // Format the message for WhatsApp
+            const whatsappMessage = `*NEW WEBSITE REVIEW!*%0A%0A*Name:* ${name}%0A*Role:* ${role}%0A*Rating:* ${currentRating} Stars ⭐️%0A*Review:* "${text}"%0A%0A(I also have a profile picture I can send you!)`;
+            
+            // Your WhatsApp Number
+            const phone = "60198162602"; 
+            
+            // Open WhatsApp link
+            window.open(`https://wa.me/${phone}?text=${whatsappMessage}`, '_blank');
+            
+            // Close the form
+            closeReviewModal();
+            
+            // Clear the form
+            document.getElementById('reviewForm').reset();
+            setRating(5);
+        }
     </script>
 </body>
 </html>
+
 
