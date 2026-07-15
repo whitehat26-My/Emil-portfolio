@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emil Tech Solutions | Web & Python Developer</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-[#0B1B3D] text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <div class="text-blue-500 font-mono text-3xl font-bold tracking-tighter">
+                        &lt;<span class="text-white">/</span>&gt;
+                    </div>
+                    <div>
+                        <span class="text-blue-500 font-bold text-xl tracking-wider">EMIL</span>
+                        <span class="text-white font-semibold text-xl tracking-wider ml-2">TECH</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="hover:text-blue-400 transition-colors">Home</a>
+                    <a href="#about" class="hover:text-blue-400 transition-colors">About</a>
+                    <a href="#services" class="hover:text-blue-400 transition-colors">Services</a>
+                    <a href="#contact" class="hover:text-blue-400 transition-colors">Contact</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white">
+                        <i class="ph ph-list text-3xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#0B1B3D] border-t border-slate-700">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="mobile-link block px-3 py-2 text-base font-medium hover:bg-slate-800 rounded-md">Home</a>
+                <a href="#about" class="mobile-link block px-3 py-2 text-base font-medium hover:bg-slate-800 rounded-md">About</a>
+                <a href="#services" class="mobile-link block px-3 py-2 text-base font-medium hover:bg-slate-800 rounded-md">Services</a>
+                <a href="#contact" class="mobile-link block px-3 py-2 text-base font-medium hover:bg-slate-800 rounded-md">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative flex flex-col md:flex-row min-h-[85vh]">
+        <!-- Left Side (Dark) -->
+        <div class="bg-[#0B1B3D] text-white w-full md:w-1/2 flex flex-col justify-center px-8 md:px-16 lg:px-24 py-16 relative overflow-hidden">
+            <!-- Subtle Background Accent -->
+            <div class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-blue-600 rounded-full opacity-10 blur-3xl"></div>
+            
+            <div class="relative z-10 space-y-6">
+                <!-- Open to work badge -->
+                <div class="inline-flex items-center space-x-2 bg-green-500/10 border border-green-500/20 text-green-400 px-4 py-1.5 rounded-full text-sm font-medium mb-2">
+                    <span class="relative flex h-2.5 w-2.5">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+                    </span>
+                    <span>Available for Freelance & Part-Time Projects</span>
+                </div>
+
+                <div class="inline-flex items-center space-x-4 bg-slate-800/50 p-4 rounded-xl border border-slate-700 w-fit">
+                    <div class="text-blue-500 font-mono text-5xl font-bold tracking-tighter">
+                        &lt;<span class="text-white">/</span>&gt;
+                    </div>
+                    <div>
+                        <h1 class="text-3xl sm:text-4xl font-bold tracking-wider">
+                            <span class="text-blue-500">EMIL</span> TECH<br/>SOLUTIONS
+                        </h1>
+                    </div>
+                </div>
+                
+                <p class="text-xl text-slate-300 font-medium tracking-widest uppercase">
+                    Build. Code. Solve.
+                </p>
+                
+                <p class="text-slate-400 max-w-md text-lg mt-4">
+                    Bringing an analytical mindset to web development and Python programming. High-value solutions tailored for your business.
+                </p>
+
+                <div class="pt-8 flex flex-wrap gap-4">
+                    <a href="https://wa.me/60198162602" target="_blank" class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-green-600 hover:bg-green-700 rounded-lg shadow-lg shadow-green-500/30 transition-all">
+                        <i class="ph ph-whatsapp-logo mr-2 text-xl"></i>
+                        WhatsApp Me
+                    </a>
+                    <a href="#services" class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-lg transition-all">
+                        See My Services
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side (Light) -->
+        <div class="bg-white w-full md:w-1/2 flex flex-col justify-center px-8 md:px-16 lg:px-24 py-16 relative">
+            <div class="space-y-8 relative z-10">
+                <div>
+                    <h2 class="text-4xl sm:text-5xl font-bold text-slate-900 mb-2">Erfan Emil</h2>
+                    <h2 class="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">bin Sarifudin</h2>
+                    
+                    <div class="h-1 w-20 bg-blue-600 mb-6 rounded-full"></div>
+                    
+                    <p class="text-lg text-blue-600 font-semibold tracking-wide uppercase mb-1">
+                        Web Developer <span class="text-slate-300 mx-2">|</span> Python Developer
+                    </p>
+                    <p class="text-slate-500 font-medium tracking-wide uppercase">
+                        IT Solutions
+                    </p>
+                </div>
+
+                <div class="space-y-6 pt-8 border-t border-slate-100">
+                    <a href="https://wa.me/60198162602" target="_blank" class="flex items-center space-x-4 group cursor-pointer w-fit">
+                        <div class="w-12 h-12 bg-green-50 text-green-600 rounded-full flex items-center justify-center group-hover:bg-green-600 group-hover:text-white transition-colors">
+                            <i class="ph ph-whatsapp-logo text-2xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-slate-500 group-hover:text-green-600 transition-colors">Tap to WhatsApp</p>
+                            <p class="text-lg font-medium text-slate-900">+60 19-816 2602</p>
+                        </div>
+                    </a>
+
+                    <a href="mailto:emilerfan91@gmail.com" class="flex items-center space-x-4 group cursor-pointer w-fit">
+                        <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                            <i class="ph ph-envelope text-2xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-slate-500 group-hover:text-blue-600 transition-colors">Email Me</p>
+                            <p class="text-lg font-medium text-slate-900">emilerfan91@gmail.com</p>
+                        </div>
+                    </a>
+
+                    <div class="flex items-center space-x-4 group">
+                        <div class="w-12 h-12 bg-slate-100 text-slate-600 rounded-full flex items-center justify-center">
+                            <i class="ph ph-map-pin text-2xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-slate-500">Location</p>
+                            <p class="text-lg font-medium text-slate-900">Wangsa Maju, Kuala Lumpur</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-16 items-center">
+                
+                <!-- Image Side -->
+                <div class="w-full lg:w-5/12">
+                    <div class="relative">
+                        <!-- Decorative background shape -->
+                        <div class="absolute -inset-4 bg-blue-600/10 rounded-[2rem] transform rotate-3"></div>
+                        <div class="absolute -inset-4 bg-[#0B1B3D]/10 rounded-[2rem] transform -rotate-3"></div>
+                        
+                        <!-- REPLACE the src="..." inside this image tag with your actual image filename later (e.g., src="profile.png") -->
+                        <img 
+                            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop" 
+                            alt="Erfan Emil Profile" 
+                            class="relative z-10 rounded-2xl shadow-xl w-full object-cover aspect-[4/5]"
+                            onerror="this.src='https://via.placeholder.com/400x500/0B1B3D/FFFFFF?text=Erfan+Emil'"
+                        />
+                    </div>
+                </div>
+
+                <!-- Text Side -->
+                <div class="w-full lg:w-7/12">
+                    <h3 class="text-blue-600 font-semibold tracking-wide uppercase text-sm mb-2">About Me</h3>
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6">Accounting Student & Tech Enthusiast</h2>
+                    <div class="h-1 w-16 bg-blue-600 rounded-full mb-8"></div>
+                    
+                    <div class="space-y-5 text-slate-600 text-lg leading-relaxed">
+                        <p>
+                            Hi! I'm Erfan. My background is uniquely split between two worlds: business and technology. As an accounting student, I have a strong grasp of business logic, numbers, and operations. But my true passion has always been IT.
+                        </p>
+                        <p>
+                            I currently work part-time in the IT sector, bridging the gap between my studies and real-world tech solutions. Whether it's developing websites, writing Python scripts to automate boring tasks, or troubleshooting systems, I love solving problems.
+                        </p>
+                        
+                        <!-- The "Worth It" Pricing Block -->
+                        <div class="bg-blue-50 border-l-4 border-blue-600 p-6 my-8 rounded-r-xl">
+                            <h4 class="text-xl font-bold text-[#0B1B3D] mb-2 flex items-center">
+                                <i class="ph ph-check-circle text-blue-600 mr-2 text-2xl"></i>
+                                High Value, Competitive Rates
+                            </h4>
+                            <p class="text-slate-700 text-base">
+                                Because I am actively looking to build my portfolio with fresh, real-world projects, I offer highly competitive pricing. You get the dedicated attention and quality of a passionate developer, ensuring that the final product is truly worth your investment.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="mt-10">
+                        <h4 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">Core Tech Stack & Skills</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-slate-100 text-slate-700 px-4 py-2 rounded-lg text-sm font-medium border border-slate-200">Python</span>
+                            <span class="bg-slate-100 text-slate-700 px-4 py-2 rounded-lg text-sm font-medium border border-slate-200">HTML & CSS</span>
+                            <span class="bg-slate-100 text-slate-700 px-4 py-2 rounded-lg text-sm font-medium border border-slate-200">Web Development</span>
+                            <span class="bg-slate-100 text-slate-700 px-4 py-2 rounded-lg text-sm font-medium border border-slate-200">Automation Scripts</span>
+                            <span class="bg-slate-100 text-slate-700 px-4 py-2 rounded-lg text-sm font-medium border border-slate-200">Data Processing</span>
+                            <span class="bg-slate-100 text-slate-700 px-4 py-2 rounded-lg text-sm font-medium border border-slate-200">IT Support</span>
+                            <span class="bg-slate-100 text-slate-700 px-4 py-2 rounded-lg text-sm font-medium border border-slate-200">Hardware/Software Setup</span>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-slate-50 border-t border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h3 class="text-blue-600 font-semibold tracking-wide uppercase text-sm mb-2">What I Do</h3>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900">How I Can Help You</h2>
+                <div class="mt-4 mx-auto w-16 h-1 bg-blue-600 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-lg transition-shadow group">
+                    <div class="w-14 h-14 bg-[#0B1B3D] text-blue-400 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="ph ph-globe text-3xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-900 mb-3">Website Development</h4>
+                    <p class="text-slate-600 leading-relaxed">
+                        Modern, responsive and user-friendly websites designed to grow your business and establish your digital presence.
+                    </p>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-lg transition-shadow group">
+                    <div class="w-14 h-14 bg-[#0B1B3D] text-blue-400 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="ph ph-code text-3xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-900 mb-3">Python Programming</h4>
+                    <p class="text-slate-600 leading-relaxed">
+                        Custom Python solutions, scripting, and automation. I can help streamline your daily workflows and process data efficiently.
+                    </p>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-lg transition-shadow group">
+                    <div class="w-14 h-14 bg-[#0B1B3D] text-blue-400 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="ph ph-monitor text-3xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-900 mb-3">IT Services & Support</h4>
+                    <p class="text-slate-600 leading-relaxed">
+                        Comprehensive troubleshooting, system setup, hardware/software maintenance, and technical support to keep you running smoothly.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Proposition -->
+    <section class="bg-white py-12 border-t border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
+                <h3 class="text-2xl font-bold text-slate-900 text-center md:text-left">
+                    LET'S BUILD SOMETHING <span class="text-blue-600">GREAT</span> TOGETHER.
+                </h3>
+                
+                <div class="flex flex-wrap justify-center gap-6">
+                    <div class="flex items-center space-x-2 text-slate-600 font-medium">
+                        <i class="ph ph-shield-check text-blue-500 text-xl"></i>
+                        <span>RELIABLE</span>
+                    </div>
+                    <div class="text-slate-300">|</div>
+                    <div class="flex items-center space-x-2 text-slate-600 font-medium">
+                        <i class="ph ph-rocket-launch text-blue-500 text-xl"></i>
+                        <span>EFFICIENT</span>
+                    </div>
+                    <div class="text-slate-300">|</div>
+                    <div class="flex items-center space-x-2 text-slate-600 font-medium">
+                        <i class="ph ph-check-circle text-blue-500 text-xl"></i>
+                        <span>PROFESSIONAL</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Contact -->
+    <footer id="contact" class="bg-[#0B1B3D] pt-16 pb-8 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12 border-b border-slate-700 pb-12">
+                
+                <!-- Contact Info & Map -->
+                <div>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="text-blue-500 font-mono text-2xl font-bold tracking-tighter">
+                            &lt;<span class="text-white">/</span>&gt;
+                        </div>
+                        <div>
+                            <span class="text-blue-500 font-bold text-lg tracking-wider">EMIL</span>
+                            <span class="text-white font-semibold text-lg tracking-wider ml-2">TECH</span>
+                        </div>
+                    </div>
+                    <p class="text-slate-400 mb-8 max-w-sm">
+                        Ready to start a project? I'm currently accepting new work. Reach out directly via WhatsApp or email to get a competitive quote!
+                    </p>
+                    
+                    <div class="space-y-6 mb-8">
+                        <a href="https://wa.me/60198162602" target="_blank" class="flex items-center space-x-4 text-slate-300 hover:text-green-400 transition-colors bg-slate-800/50 w-fit px-4 py-2 rounded-lg border border-slate-700">
+                            <i class="ph ph-whatsapp-logo text-green-500 text-2xl"></i>
+                            <span class="font-medium">Chat on WhatsApp</span>
+                        </a>
+                        
+                        <a href="mailto:emilerfan91@gmail.com" class="flex items-center space-x-4 text-slate-300 hover:text-white transition-colors">
+                            <i class="ph ph-envelope text-blue-500 text-xl"></i>
+                            <span>emilerfan91@gmail.com</span>
+                        </a>
+                        
+                        <div class="flex items-center space-x-4 text-slate-300">
+                            <i class="ph ph-map-pin text-blue-500 text-xl"></i>
+                            <span>Wangsa Maju, Kuala Lumpur</span>
+                        </div>
+                    </div>
+
+                    <!-- Embedded Map -->
+                    <div class="rounded-xl overflow-hidden border border-slate-700 h-48 w-full shadow-inner bg-slate-800">
+                        <iframe 
+                            title="Wangsa Maju Map Location"
+                            width="100%" 
+                            height="100%" 
+                            style="border: 0;" 
+                            loading="lazy" 
+                            allowfullscreen 
+                            src="https://maps.google.com/maps?q=Wangsa%20Maju,%20Kuala%20Lumpur&t=&z=13&ie=UTF8&iwloc=&output=embed">
+                        </iframe>
+                    </div>
+                </div>
+
+                <!-- Simple Contact Form -->
+                <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700 h-fit">
+                    <h4 class="text-xl font-bold mb-4">Send a Message</h4>
+                    <!-- Form redirects to WhatsApp on submit -->
+                    <form class="space-y-4" onsubmit="event.preventDefault(); window.open('https://wa.me/60198162602', '_blank');">
+                        <div>
+                            <input type="text" placeholder="Your Name" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors" />
+                        </div>
+                        <div>
+                            <textarea placeholder="Tell me about your project..." required rows="4" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 flex justify-center items-center text-white font-medium py-3 rounded-lg transition-colors mt-2">
+                            <i class="ph ph-whatsapp-logo mr-2 text-lg"></i>
+                            Continue to WhatsApp
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+            
+            <div class="text-center text-slate-500 text-sm">
+                <p>&copy; <span id="year"></span> Emil Tech Solutions. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Simple Script for Mobile Menu & Footer Year -->
+    <script>
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Mobile menu toggle logic
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        const icon = menuBtn.querySelector('i');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            if(mobileMenu.classList.contains('hidden')) {
+                icon.classList.remove('ph-x');
+                icon.classList.add('ph-list');
+            } else {
+                icon.classList.remove('ph-list');
+                icon.classList.add('ph-x');
+            }
+        });
+
+        // Close menu when clicking a link
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                icon.classList.remove('ph-x');
+                icon.classList.add('ph-list');
+            });
+        });
+    </script>
+</body>
+</html>
+
