@@ -33,6 +33,7 @@
                     <a href="#home" class="hover:text-blue-400 transition-colors">Home</a>
                     <a href="#about" class="hover:text-blue-400 transition-colors">About</a>
                     <a href="#services" class="hover:text-blue-400 transition-colors">Services</a>
+                    <a href="#work" class="hover:text-blue-400 transition-colors">My Work</a>
                     <a href="#reviews" class="hover:text-blue-400 transition-colors">Reviews</a>
                     <a href="#contact" class="hover:text-blue-400 transition-colors">Contact</a>
                 </div>
@@ -52,6 +53,7 @@
                 <a href="#home" class="mobile-link block px-3 py-2 text-base font-medium hover:bg-slate-800 rounded-md">Home</a>
                 <a href="#about" class="mobile-link block px-3 py-2 text-base font-medium hover:bg-slate-800 rounded-md">About</a>
                 <a href="#services" class="mobile-link block px-3 py-2 text-base font-medium hover:bg-slate-800 rounded-md">Services</a>
+                <a href="#work" class="mobile-link block px-3 py-2 text-base font-medium hover:bg-slate-800 rounded-md">My Work</a>
                 <a href="#reviews" class="mobile-link block px-3 py-2 text-base font-medium hover:bg-slate-800 rounded-md">Reviews</a>
                 <a href="#contact" class="mobile-link block px-3 py-2 text-base font-medium hover:bg-slate-800 rounded-md">Contact</a>
             </div>
@@ -263,6 +265,36 @@
                     <p class="text-slate-600 leading-relaxed">
                         Comprehensive troubleshooting, system setup, hardware/software maintenance, and technical support to keep you running smoothly.
                     </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- My Work / Portfolio Section -->
+    <section id="work" class="py-24 bg-white border-t border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h3 class="text-blue-600 font-semibold tracking-wide uppercase text-sm mb-2">Portfolio</h3>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900">My Work</h2>
+                <div class="mt-4 mx-auto w-16 h-1 bg-blue-600 rounded-full"></div>
+                <p class="mt-6 max-w-2xl mx-auto text-slate-600 text-lg">
+                    A look at real projects I've built for clients.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Project: Clinical Reference App -->
+                <div onclick="openModal('Clinical Reference Web App', 'work-clinical-reference-app.jpeg', 'Built for a doctor client who wanted a digital &quot;clinical blue book&quot; &mdash; a fast, organized reference app covering Internal Medicine, Surgical, Paediatrics, Orthopaedics, O&amp;G, and Mnemonics, so they could quickly look up clinical notes on the go.')"
+                     class="bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-lg hover:-translate-y-2 transition-all duration-300 group cursor-pointer overflow-hidden">
+                    <div class="overflow-hidden h-48">
+                        <img src="work-clinical-reference-app.jpeg" alt="Clinical Reference Web App" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold text-slate-900 mb-2">Clinical Reference Web App</h4>
+                        <p class="text-slate-600 leading-relaxed text-sm">
+                            A digital "clinical blue book" built for a doctor, organizing key medical topics for quick reference.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
