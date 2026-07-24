@@ -78,7 +78,7 @@
             content: '';
             position: fixed;
             inset: 0;
-            z-index: -2;
+            z-index: 0;
             pointer-events: none;
             background-image:
                 linear-gradient(rgba(34, 211, 238, 0.05) 1px, transparent 1px),
@@ -86,15 +86,27 @@
             background-size: 42px 42px;
         }
 
-        /* Animated particle network background */
+        /* Animated particle network background.
+           Deliberately NOT using a negative z-index here: some WebKit/Safari
+           versions mis-composite position:fixed elements with negative z-index
+           when backdrop-filter is used elsewhere on the page (as .hud-card does),
+           which silently hid this canvas on iOS Safari. Using z-index: 0 plus an
+           explicit position:relative + z-index:1 wrapper around all real page
+           content (#page-content, below) keeps the stacking order unambiguous
+           in every browser. */
         #particle-bg {
             position: fixed;
             inset: 0;
-            z-index: -1;
+            z-index: 0;
             pointer-events: none;
             display: block;
             width: 100%;
             height: 100%;
+        }
+
+        #page-content {
+            position: relative;
+            z-index: 1;
         }
 
         * { scrollbar-width: thin; scrollbar-color: rgba(34, 211, 238, 0.4) transparent; }
@@ -140,6 +152,8 @@
 
     <!-- Animated particle network background -->
     <canvas id="particle-bg" aria-hidden="true"></canvas>
+
+    <div id="page-content">
 
     <!-- Navigation -->
     <nav class="sticky top-0 z-50 bg-slate-950/90 backdrop-blur border-b border-cyan-500/20 text-white shadow-[0_4px_20px_rgba(34,211,238,0.1)]">
@@ -626,6 +640,7 @@
         </div>
     </div>
 
+    </div> <!-- /#page-content -->
 
     <!-- Scripts -->
     <script>
