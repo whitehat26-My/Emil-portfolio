@@ -1,0 +1,11 @@
+{
+  "name": "Emil Tech Solutions",
+  "short_name": "Emil Tech",
+  "icons": [
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "theme_color": "#020617",
+  "background_color": "#020617",
+  "display": "standalone",
+  "start_url": "/"
+}

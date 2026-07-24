@@ -7,6 +7,28 @@
     <meta name="description" content="Emil Tech Solutions offers freelance website development, vibe coding automation, and IT support services in Wangsa Maju, Kuala Lumpur. Affordable, reliable solutions for your business." />
     <link rel="canonical" href="https://emiltech.it.com/" />
 
+    <!-- Favicons / home screen icons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#020617" />
+
+    <!-- Open Graph / social share preview (WhatsApp, Facebook, LinkedIn, etc.) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Emil Tech Solutions | Web Developer & Vibe Coder in Kuala Lumpur" />
+    <meta property="og:description" content="Freelance website development, vibe coding automation, and IT support services in Wangsa Maju, Kuala Lumpur." />
+    <meta property="og:url" content="https://emiltech.it.com/" />
+    <meta property="og:image" content="https://emiltech.it.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Emil Tech Solutions | Web Developer & Vibe Coder in Kuala Lumpur" />
+    <meta name="twitter:description" content="Freelance website development, vibe coding automation, and IT support services in Wangsa Maju, Kuala Lumpur." />
+    <meta name="twitter:image" content="https://emiltech.it.com/og-image.png" />
+
     <!-- Structured data: helps Google show this as a local business in search results -->
     <script type="application/ld+json">
     {
@@ -132,7 +154,7 @@
 
                 <!-- Mobile Menu Button -->
                 <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-slate-400 hover:text-cyan-400">
+                    <button id="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu" class="text-slate-400 hover:text-cyan-400">
                         <i class="ph ph-list text-3xl"></i>
                     </button>
                 </div>
@@ -525,7 +547,7 @@
     <!-- ========================================== -->
     <div id="serviceModal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 p-4 opacity-0 transition-opacity duration-300 backdrop-blur-sm">
         <div id="modalContent" class="relative w-full max-w-2xl transform overflow-hidden rounded-2xl bg-slate-900 border border-cyan-500/30 shadow-[0_0_40px_rgba(34,211,238,0.15)] text-left align-middle transition-all scale-95">
-            <button onclick="closeModal()" class="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-slate-950/70 text-cyan-300 hover:bg-cyan-500/30 transition-colors backdrop-blur-md cursor-pointer">
+            <button onclick="closeModal()" aria-label="Close" class="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-slate-950/70 text-cyan-300 hover:bg-cyan-500/30 transition-colors backdrop-blur-md cursor-pointer">
                 <i class="ph ph-x text-xl"></i>
             </button>
             <img id="modalImage" src="" alt="Service Image" class="h-48 sm:h-72 w-full object-cover">
@@ -543,7 +565,7 @@
     <div id="reviewFormModal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 p-4 opacity-0 transition-opacity duration-300 backdrop-blur-sm">
         <div id="reviewModalContent" class="relative w-full max-w-lg transform overflow-hidden rounded-2xl bg-slate-900 border border-cyan-500/30 shadow-[0_0_40px_rgba(34,211,238,0.15)] text-left align-middle transition-all scale-95 p-8">
 
-            <button onclick="closeReviewModal()" class="absolute right-4 top-4 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-slate-800 text-slate-400 hover:bg-cyan-500/30 hover:text-cyan-300 transition-colors">
+            <button onclick="closeReviewModal()" aria-label="Close" class="absolute right-4 top-4 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-slate-800 text-slate-400 hover:bg-cyan-500/30 hover:text-cyan-300 transition-colors">
                 <i class="ph ph-x text-lg"></i>
             </button>
 
@@ -627,12 +649,14 @@
 
         menuBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
-            if(mobileMenu.classList.contains('hidden')) {
-                icon.classList.remove('ph-x');
-                icon.classList.add('ph-list');
-            } else {
+            const isOpen = !mobileMenu.classList.contains('hidden');
+            menuBtn.setAttribute('aria-expanded', String(isOpen));
+            if(isOpen) {
                 icon.classList.remove('ph-list');
                 icon.classList.add('ph-x');
+            } else {
+                icon.classList.remove('ph-x');
+                icon.classList.add('ph-list');
             }
         });
 
@@ -640,6 +664,7 @@
         mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.add('hidden');
+                menuBtn.setAttribute('aria-expanded', 'false');
                 icon.classList.remove('ph-x');
                 icon.classList.add('ph-list');
             });
