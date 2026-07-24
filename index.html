@@ -770,10 +770,26 @@
             return div.innerHTML;
         }
 
+        // Security: only ever treat a photoURL as safe to render if it's a well-formed
+        // https URL pointing at our own Firebase Storage bucket. Reviews are written by
+        // anonymous visitors (and can bypass our form entirely via the public Firebase API),
+        // so this field cannot be trusted — without this check, a malicious photoURL value
+        // rendered into an <img src="..."> attribute could break out and inject script.
+        function isSafePhotoURL(url) {
+            if (typeof url !== 'string' || url.length === 0 || url.length > 2000) return false;
+            try {
+                const parsed = new URL(url);
+                return parsed.protocol === 'https:' && parsed.hostname === 'firebasestorage.googleapis.com';
+            } catch {
+                return false;
+            }
+        }
+
         function reviewCardHtml(review, index) {
             const color = AVATAR_COLORS[index % AVATAR_COLORS.length];
-            const avatar = review.photoURL
-                ? `<img src="${review.photoURL}" alt="${escapeHtml(review.name)}" class="w-12 h-12 rounded-full object-cover">`
+            const safePhotoURL = isSafePhotoURL(review.photoURL) ? review.photoURL : null;
+            const avatar = safePhotoURL
+                ? `<img src="${escapeHtml(safePhotoURL)}" alt="${escapeHtml(review.name)}" class="w-12 h-12 rounded-full object-cover">`
                 : `<div class="w-12 h-12 rounded-full ${color.bg} ${color.text} flex items-center justify-center font-bold text-lg">${escapeHtml(initialsFor(review.name))}</div>`;
 
             return `
