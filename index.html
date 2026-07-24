@@ -131,6 +131,44 @@
             }
         }
 
+        /* Skills list: continuous scanning sweep + gently floating numbers */
+        .skill-number {
+            display: inline-block;
+            animation: skillNumberFloat 3s ease-in-out infinite;
+        }
+        @keyframes skillNumberFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+
+        #skillsList {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-scan-line {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.9), transparent);
+            box-shadow: 0 0 12px rgba(34, 211, 238, 0.8);
+            pointer-events: none;
+            animation: skillScanSweep 4s linear infinite;
+        }
+        @keyframes skillScanSweep {
+            0% { top: 0%; opacity: 0; }
+            5% { opacity: 1; }
+            95% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .skill-number { animation: none; }
+            .skill-scan-line { display: none; }
+        }
+
         * { scrollbar-width: thin; scrollbar-color: rgba(34, 211, 238, 0.4) transparent; }
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: transparent; }
@@ -333,29 +371,30 @@
 
                     <div class="mt-10">
                         <h4 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4 font-mono">Core Tech Stack & Skills</h4>
-                        <div id="skillsList" class="divide-y divide-cyan-500/10 border-t border-b border-cyan-500/10">
+                        <div id="skillsList" class="relative overflow-hidden divide-y divide-cyan-500/10 border-t border-b border-cyan-500/10">
+                            <div class="skill-scan-line" aria-hidden="true"></div>
                             <div class="skill-row flex items-baseline gap-4 py-4">
-                                <span class="text-cyan-500/70 font-mono text-sm shrink-0">01</span>
+                                <span class="skill-number text-cyan-500/70 font-mono text-sm shrink-0" style="animation-delay: 0s">01</span>
                                 <p class="text-slate-300"><span class="text-white font-semibold">Vibe Coding</span> &mdash; turning ideas into working software, fast, with AI-assisted workflows.</p>
                             </div>
                             <div class="skill-row flex items-baseline gap-4 py-4">
-                                <span class="text-cyan-500/70 font-mono text-sm shrink-0">02</span>
+                                <span class="skill-number text-cyan-500/70 font-mono text-sm shrink-0" style="animation-delay: 0.2s">02</span>
                                 <p class="text-slate-300"><span class="text-white font-semibold">Web Development</span> &mdash; modern, responsive websites and apps built to grow your business.</p>
                             </div>
                             <div class="skill-row flex items-baseline gap-4 py-4">
-                                <span class="text-cyan-500/70 font-mono text-sm shrink-0">03</span>
+                                <span class="skill-number text-cyan-500/70 font-mono text-sm shrink-0" style="animation-delay: 0.4s">03</span>
                                 <p class="text-slate-300"><span class="text-white font-semibold">Automation Scripts</span> &mdash; streamlining repetitive tasks so you can focus on what matters.</p>
                             </div>
                             <div class="skill-row flex items-baseline gap-4 py-4">
-                                <span class="text-cyan-500/70 font-mono text-sm shrink-0">04</span>
+                                <span class="skill-number text-cyan-500/70 font-mono text-sm shrink-0" style="animation-delay: 0.6s">04</span>
                                 <p class="text-slate-300"><span class="text-white font-semibold">Data Processing</span> &mdash; cleaning, organizing, and making sense of messy data.</p>
                             </div>
                             <div class="skill-row flex items-baseline gap-4 py-4">
-                                <span class="text-cyan-500/70 font-mono text-sm shrink-0">05</span>
+                                <span class="skill-number text-cyan-500/70 font-mono text-sm shrink-0" style="animation-delay: 0.8s">05</span>
                                 <p class="text-slate-300"><span class="text-white font-semibold">IT Support</span> &mdash; reliable troubleshooting and systems support when you need it.</p>
                             </div>
                             <div class="skill-row flex items-baseline gap-4 py-4">
-                                <span class="text-cyan-500/70 font-mono text-sm shrink-0">06</span>
+                                <span class="skill-number text-cyan-500/70 font-mono text-sm shrink-0" style="animation-delay: 1s">06</span>
                                 <p class="text-slate-300"><span class="text-white font-semibold">Hardware/Software Setup</span> &mdash; getting your devices and tools working exactly right.</p>
                             </div>
                         </div>
