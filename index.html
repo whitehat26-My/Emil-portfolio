@@ -78,12 +78,23 @@
             content: '';
             position: fixed;
             inset: 0;
-            z-index: -1;
+            z-index: -2;
             pointer-events: none;
             background-image:
                 linear-gradient(rgba(34, 211, 238, 0.05) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(34, 211, 238, 0.05) 1px, transparent 1px);
             background-size: 42px 42px;
+        }
+
+        /* Animated particle network background */
+        #particle-bg {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            display: block;
+            width: 100%;
+            height: 100%;
         }
 
         * { scrollbar-width: thin; scrollbar-color: rgba(34, 211, 238, 0.4) transparent; }
@@ -126,6 +137,9 @@
     </style>
 </head>
 <body class="bg-slate-950 text-slate-300">
+
+    <!-- Animated particle network background -->
+    <canvas id="particle-bg" aria-hidden="true"></canvas>
 
     <!-- Navigation -->
     <nav class="sticky top-0 z-50 bg-slate-950/90 backdrop-blur border-b border-cyan-500/20 text-white shadow-[0_4px_20px_rgba(34,211,238,0.1)]">
@@ -637,6 +651,96 @@
         } catch (err) {
             console.error('Firebase failed to initialize:', err);
         }
+
+        // --- Animated particle network background ---
+        (function() {
+            const canvas = document.getElementById('particle-bg');
+            if (!canvas || !canvas.getContext) return;
+            const ctx = canvas.getContext('2d');
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            let width, height, particles, animationId, resizeTimeout;
+
+            function buildParticles() {
+                const density = width < 768 ? 18000 : 12000; // px^2 of screen per particle
+                const count = Math.min(90, Math.max(24, Math.floor((width * height) / density)));
+                particles = Array.from({ length: count }, () => ({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    vx: (Math.random() - 0.5) * 0.25,
+                    vy: (Math.random() - 0.5) * 0.25,
+                }));
+            }
+
+            function resize() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+                buildParticles();
+            }
+
+            function drawFrame() {
+                ctx.clearRect(0, 0, width, height);
+                const maxDist = width < 768 ? 100 : 140;
+
+                for (const p of particles) {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    if (p.x < 0 || p.x > width) p.vx *= -1;
+                    if (p.y < 0 || p.y > height) p.vy *= -1;
+                }
+
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const a = particles[i], b = particles[j];
+                        const dx = a.x - b.x, dy = a.y - b.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < maxDist) {
+                            ctx.strokeStyle = `rgba(34, 211, 238, ${0.12 * (1 - dist / maxDist)})`;
+                            ctx.lineWidth = 1;
+                            ctx.beginPath();
+                            ctx.moveTo(a.x, a.y);
+                            ctx.lineTo(b.x, b.y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                for (const p of particles) {
+                    ctx.fillStyle = 'rgba(34, 211, 238, 0.5)';
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, 1.6, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            function loop() {
+                drawFrame();
+                animationId = requestAnimationFrame(loop);
+            }
+
+            function stopLoop() {
+                if (animationId) {
+                    cancelAnimationFrame(animationId);
+                    animationId = null;
+                }
+            }
+
+            resize();
+
+            if (prefersReducedMotion) {
+                drawFrame(); // single static frame, no continuous animation
+            } else {
+                loop();
+                document.addEventListener('visibilitychange', () => {
+                    if (document.hidden) stopLoop(); else loop();
+                });
+            }
+
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(resize, 150);
+            });
+        })();
 
         // Set current year in footer
         document.getElementById('year').textContent = new Date().getFullYear();
