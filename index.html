@@ -109,6 +109,28 @@
             z-index: 1;
         }
 
+        /* Skills list: staggered scroll-reveal + hover glow */
+        .skill-row {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.5s ease, transform 0.5s ease, background-color 0.25s ease, padding-left 0.25s ease;
+        }
+        .skill-row.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .skill-row:hover {
+            background-color: rgba(34, 211, 238, 0.06);
+            padding-left: 0.5rem;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .skill-row {
+                opacity: 1;
+                transform: none;
+                transition: background-color 0.25s ease, padding-left 0.25s ease;
+            }
+        }
+
         * { scrollbar-width: thin; scrollbar-color: rgba(34, 211, 238, 0.4) transparent; }
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: transparent; }
@@ -311,28 +333,28 @@
 
                     <div class="mt-10">
                         <h4 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4 font-mono">Core Tech Stack & Skills</h4>
-                        <div class="divide-y divide-cyan-500/10 border-t border-b border-cyan-500/10">
-                            <div class="flex items-baseline gap-4 py-4">
+                        <div id="skillsList" class="divide-y divide-cyan-500/10 border-t border-b border-cyan-500/10">
+                            <div class="skill-row flex items-baseline gap-4 py-4">
                                 <span class="text-cyan-500/70 font-mono text-sm shrink-0">01</span>
                                 <p class="text-slate-300"><span class="text-white font-semibold">Vibe Coding</span> &mdash; turning ideas into working software, fast, with AI-assisted workflows.</p>
                             </div>
-                            <div class="flex items-baseline gap-4 py-4">
+                            <div class="skill-row flex items-baseline gap-4 py-4">
                                 <span class="text-cyan-500/70 font-mono text-sm shrink-0">02</span>
                                 <p class="text-slate-300"><span class="text-white font-semibold">Web Development</span> &mdash; modern, responsive websites and apps built to grow your business.</p>
                             </div>
-                            <div class="flex items-baseline gap-4 py-4">
+                            <div class="skill-row flex items-baseline gap-4 py-4">
                                 <span class="text-cyan-500/70 font-mono text-sm shrink-0">03</span>
                                 <p class="text-slate-300"><span class="text-white font-semibold">Automation Scripts</span> &mdash; streamlining repetitive tasks so you can focus on what matters.</p>
                             </div>
-                            <div class="flex items-baseline gap-4 py-4">
+                            <div class="skill-row flex items-baseline gap-4 py-4">
                                 <span class="text-cyan-500/70 font-mono text-sm shrink-0">04</span>
                                 <p class="text-slate-300"><span class="text-white font-semibold">Data Processing</span> &mdash; cleaning, organizing, and making sense of messy data.</p>
                             </div>
-                            <div class="flex items-baseline gap-4 py-4">
+                            <div class="skill-row flex items-baseline gap-4 py-4">
                                 <span class="text-cyan-500/70 font-mono text-sm shrink-0">05</span>
                                 <p class="text-slate-300"><span class="text-white font-semibold">IT Support</span> &mdash; reliable troubleshooting and systems support when you need it.</p>
                             </div>
-                            <div class="flex items-baseline gap-4 py-4">
+                            <div class="skill-row flex items-baseline gap-4 py-4">
                                 <span class="text-cyan-500/70 font-mono text-sm shrink-0">06</span>
                                 <p class="text-slate-300"><span class="text-white font-semibold">Hardware/Software Setup</span> &mdash; getting your devices and tools working exactly right.</p>
                             </div>
@@ -766,6 +788,25 @@
                 clearTimeout(resizeTimeout);
                 resizeTimeout = setTimeout(resize, 150);
             });
+        })();
+
+        // Staggered scroll-reveal for the Core Tech Stack & Skills list
+        (function() {
+            const rows = document.querySelectorAll('#skillsList .skill-row');
+            if (!rows.length || !('IntersectionObserver' in window)) {
+                rows.forEach(row => row.classList.add('is-visible'));
+                return;
+            }
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const index = Array.from(rows).indexOf(entry.target);
+                        setTimeout(() => entry.target.classList.add('is-visible'), index * 90);
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+            rows.forEach(row => observer.observe(row));
         })();
 
         // Set current year in footer
