@@ -7,6 +7,11 @@
     <meta name="description" content="Emil Tech Solutions offers freelance website development, Python automation, and IT support services in Wangsa Maju, Kuala Lumpur. Affordable, reliable solutions for your business." />
     <link rel="canonical" href="https://emiltech.it.com/" />
 
+    <!-- Fonts (sci-fi HUD look) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -17,37 +22,94 @@
     <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-storage-compat.js"></script>
+
+    <style>
+        body { font-family: 'Rajdhani', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Orbitron', sans-serif; letter-spacing: 0.02em; }
+        .font-orbitron { font-family: 'Orbitron', sans-serif; }
+
+        /* Subtle HUD grid overlay across the whole page */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background-image:
+                linear-gradient(rgba(34, 211, 238, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(34, 211, 238, 0.05) 1px, transparent 1px);
+            background-size: 42px 42px;
+        }
+
+        * { scrollbar-width: thin; scrollbar-color: rgba(34, 211, 238, 0.4) transparent; }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(34, 211, 238, 0.35); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(34, 211, 238, 0.6); }
+
+        .hud-card {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(34, 211, 238, 0.18);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+        }
+        .hud-card:hover {
+            border-color: rgba(34, 211, 238, 0.55);
+            box-shadow: 0 0 28px rgba(34, 211, 238, 0.18);
+        }
+
+        .hud-btn-primary {
+            background: #22d3ee;
+            color: #020617;
+            box-shadow: 0 0 18px rgba(34, 211, 238, 0.45);
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hud-btn-primary:hover {
+            background: #67e8f9;
+            box-shadow: 0 0 32px rgba(34, 211, 238, 0.75);
+        }
+
+        .hud-divider {
+            background: #22d3ee;
+            animation: hud-pulse 3s ease-in-out infinite;
+        }
+        @keyframes hud-pulse {
+            0%, 100% { box-shadow: 0 0 8px rgba(34, 211, 238, 0.5); }
+            50% { box-shadow: 0 0 18px rgba(34, 211, 238, 0.9); }
+        }
+    </style>
 </head>
-<body class="bg-slate-50 font-sans text-slate-800">
+<body class="bg-slate-950 text-slate-300">
 
     <!-- Navigation -->
-    <nav class="sticky top-0 z-50 bg-[#0B1B3D] text-white shadow-lg">
+    <nav class="sticky top-0 z-50 bg-slate-950/90 backdrop-blur border-b border-cyan-500/20 text-white shadow-[0_4px_20px_rgba(34,211,238,0.1)]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20 items-center">
                 <!-- Logo -->
                 <div class="flex items-center space-x-3">
-                    <div class="text-blue-500 font-mono text-3xl font-bold tracking-tighter">
+                    <div class="text-cyan-400 font-mono text-3xl font-bold tracking-tighter">
                         &lt;<span class="text-white">/</span>&gt;
                     </div>
                     <div>
-                        <span class="text-blue-500 font-bold text-xl tracking-wider">EMIL</span>
-                        <span class="text-white font-semibold text-xl tracking-wider ml-2">TECH</span>
+                        <span class="text-cyan-400 font-orbitron font-bold text-xl tracking-wider">EMIL</span>
+                        <span class="text-white font-orbitron font-semibold text-xl tracking-wider ml-2">TECH</span>
                     </div>
                 </div>
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-8">
-                    <a href="#home" class="hover:text-blue-400 transition-colors">Home</a>
-                    <a href="#about" class="hover:text-blue-400 transition-colors">About</a>
-                    <a href="#services" class="hover:text-blue-400 transition-colors">Services</a>
-                    <a href="#work" class="hover:text-blue-400 transition-colors">My Work</a>
-                    <a href="#reviews" class="hover:text-blue-400 transition-colors">Reviews</a>
-                    <a href="#contact" class="hover:text-blue-400 transition-colors">Contact</a>
+                    <a href="#home" class="hover:text-cyan-400 transition-colors">Home</a>
+                    <a href="#about" class="hover:text-cyan-400 transition-colors">About</a>
+                    <a href="#services" class="hover:text-cyan-400 transition-colors">Services</a>
+                    <a href="#work" class="hover:text-cyan-400 transition-colors">My Work</a>
+                    <a href="#reviews" class="hover:text-cyan-400 transition-colors">Reviews</a>
+                    <a href="#contact" class="hover:text-cyan-400 transition-colors">Contact</a>
                 </div>
 
                 <!-- Mobile Menu Button -->
                 <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white">
+                    <button id="mobile-menu-btn" class="text-slate-400 hover:text-cyan-400">
                         <i class="ph ph-list text-3xl"></i>
                     </button>
                 </div>
@@ -55,14 +117,14 @@
         </div>
 
         <!-- Mobile Menu (Hidden by default) -->
-        <div id="mobile-menu" class="hidden md:hidden bg-[#0B1B3D] border-t border-slate-700">
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-950 border-t border-cyan-500/20">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#home" class="mobile-link block px-3 py-2 text-base font-medium hover:bg-slate-800 rounded-md">Home</a>
-                <a href="#about" class="mobile-link block px-3 py-2 text-base font-medium hover:bg-slate-800 rounded-md">About</a>
-                <a href="#services" class="mobile-link block px-3 py-2 text-base font-medium hover:bg-slate-800 rounded-md">Services</a>
-                <a href="#work" class="mobile-link block px-3 py-2 text-base font-medium hover:bg-slate-800 rounded-md">My Work</a>
-                <a href="#reviews" class="mobile-link block px-3 py-2 text-base font-medium hover:bg-slate-800 rounded-md">Reviews</a>
-                <a href="#contact" class="mobile-link block px-3 py-2 text-base font-medium hover:bg-slate-800 rounded-md">Contact</a>
+                <a href="#home" class="mobile-link block px-3 py-2 text-base font-medium hover:bg-cyan-500/10 hover:text-cyan-400 rounded-md">Home</a>
+                <a href="#about" class="mobile-link block px-3 py-2 text-base font-medium hover:bg-cyan-500/10 hover:text-cyan-400 rounded-md">About</a>
+                <a href="#services" class="mobile-link block px-3 py-2 text-base font-medium hover:bg-cyan-500/10 hover:text-cyan-400 rounded-md">Services</a>
+                <a href="#work" class="mobile-link block px-3 py-2 text-base font-medium hover:bg-cyan-500/10 hover:text-cyan-400 rounded-md">My Work</a>
+                <a href="#reviews" class="mobile-link block px-3 py-2 text-base font-medium hover:bg-cyan-500/10 hover:text-cyan-400 rounded-md">Reviews</a>
+                <a href="#contact" class="mobile-link block px-3 py-2 text-base font-medium hover:bg-cyan-500/10 hover:text-cyan-400 rounded-md">Contact</a>
             </div>
         </div>
     </nav>
@@ -70,9 +132,9 @@
     <!-- Hero Section -->
     <section id="home" class="relative flex flex-col md:flex-row min-h-[85vh]">
         <!-- Left Side (Dark) -->
-        <div class="bg-[#0B1B3D] text-white w-full md:w-1/2 flex flex-col justify-center px-8 md:px-16 lg:px-24 py-16 relative overflow-hidden">
-            <div class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-blue-600 rounded-full opacity-10 blur-3xl"></div>
-            
+        <div class="bg-slate-950 text-white w-full md:w-1/2 flex flex-col justify-center px-8 md:px-16 lg:px-24 py-16 relative overflow-hidden">
+            <div class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-cyan-500 rounded-full opacity-20 blur-3xl"></div>
+
             <div class="relative z-10 space-y-6">
                 <!-- Open to work badge -->
                 <div class="inline-flex items-center space-x-2 bg-green-500/10 border border-green-500/20 text-green-400 px-4 py-1.5 rounded-full text-sm font-medium mb-2">
@@ -83,21 +145,21 @@
                     <span>Available for Freelance & Part-Time Projects</span>
                 </div>
 
-                <div class="inline-flex items-center space-x-4 bg-slate-800/50 p-4 rounded-xl border border-slate-700 w-fit">
-                    <div class="text-blue-500 font-mono text-5xl font-bold tracking-tighter">
+                <div class="inline-flex items-center space-x-4 bg-slate-900/60 p-4 rounded-xl border border-cyan-500/20 w-fit">
+                    <div class="text-cyan-400 font-mono text-5xl font-bold tracking-tighter">
                         &lt;<span class="text-white">/</span>&gt;
                     </div>
                     <div>
                         <h1 class="text-3xl sm:text-4xl font-bold tracking-wider">
-                            <span class="text-blue-500">EMIL</span> TECH<br/>SOLUTIONS
+                            <span class="text-cyan-400">EMIL</span> TECH<br/>SOLUTIONS
                         </h1>
                     </div>
                 </div>
-                
+
                 <p class="text-xl text-slate-300 font-medium tracking-widest uppercase">
                     Build. Code. Solve.
                 </p>
-                
+
                 <p class="text-slate-400 max-w-md text-lg mt-4">
                     Bringing an analytical mindset to web development and Python programming. High-value solutions tailored for your business.
                 </p>
@@ -107,58 +169,57 @@
                         <i class="ph ph-whatsapp-logo mr-2 text-xl"></i>
                         WhatsApp Me
                     </a>
-                    <a href="#services" class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-lg transition-all">
+                    <a href="#services" class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-slate-900 hover:bg-slate-800 border border-cyan-500/40 hover:border-cyan-400 hover:text-cyan-300 rounded-lg transition-all">
                         See My Services
                     </a>
                 </div>
             </div>
         </div>
 
-        <!-- Right Side (Light) -->
-        <div class="bg-white w-full md:w-1/2 flex flex-col justify-center px-8 md:px-16 lg:px-24 py-16 relative">
+        <!-- Right Side -->
+        <div class="bg-slate-900 w-full md:w-1/2 flex flex-col justify-center px-8 md:px-16 lg:px-24 py-16 relative">
             <div class="space-y-8 relative z-10">
                 <div>
-                    <!-- REMOVED: bin Sarifudin -->
-                    <h2 class="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">Erfan Emil</h2>
-                    
-                    <div class="h-1 w-20 bg-blue-600 mb-6 rounded-full"></div>
-                    
-                    <p class="text-lg text-blue-600 font-semibold tracking-wide uppercase mb-1">
-                        Web Developer <span class="text-slate-300 mx-2">|</span> Python Developer
+                    <h2 class="text-4xl sm:text-5xl font-bold text-white mb-4">Erfan Emil</h2>
+
+                    <div class="h-1 w-20 hud-divider mb-6 rounded-full"></div>
+
+                    <p class="text-lg text-cyan-400 font-semibold tracking-wide uppercase mb-1">
+                        Web Developer <span class="text-slate-600 mx-2">|</span> Python Developer
                     </p>
-                    <p class="text-slate-500 font-medium tracking-wide uppercase">
+                    <p class="text-slate-400 font-medium tracking-wide uppercase">
                         IT Solutions
                     </p>
                 </div>
 
-                <div class="space-y-6 pt-8 border-t border-slate-100">
+                <div class="space-y-6 pt-8 border-t border-slate-800">
                     <a href="https://wa.me/60198162602" target="_blank" class="flex items-center space-x-4 group cursor-pointer w-fit">
-                        <div class="w-12 h-12 bg-green-50 text-green-600 rounded-full flex items-center justify-center group-hover:bg-green-600 group-hover:text-white transition-colors">
+                        <div class="w-12 h-12 bg-green-500/10 text-green-400 rounded-full flex items-center justify-center group-hover:bg-green-500 group-hover:text-slate-950 transition-colors">
                             <i class="ph ph-whatsapp-logo text-2xl"></i>
                         </div>
                         <div>
-                            <p class="text-sm text-slate-500 group-hover:text-green-600 transition-colors">Tap to WhatsApp</p>
-                            <p class="text-lg font-medium text-slate-900">+60 19-816 2602</p>
+                            <p class="text-sm text-slate-400 group-hover:text-green-400 transition-colors">Tap to WhatsApp</p>
+                            <p class="text-lg font-medium text-white">+60 19-816 2602</p>
                         </div>
                     </a>
 
                     <a href="mailto:emilerfan91@gmail.com" class="flex items-center space-x-4 group cursor-pointer w-fit">
-                        <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                        <div class="w-12 h-12 bg-cyan-500/10 text-cyan-400 rounded-full flex items-center justify-center group-hover:bg-cyan-500 group-hover:text-slate-950 transition-colors">
                             <i class="ph ph-envelope text-2xl"></i>
                         </div>
                         <div>
-                            <p class="text-sm text-slate-500 group-hover:text-blue-600 transition-colors">Email Me</p>
-                            <p class="text-lg font-medium text-slate-900">emilerfan91@gmail.com</p>
+                            <p class="text-sm text-slate-400 group-hover:text-cyan-400 transition-colors">Email Me</p>
+                            <p class="text-lg font-medium text-white">emilerfan91@gmail.com</p>
                         </div>
                     </a>
 
                     <div class="flex items-center space-x-4 group">
-                        <div class="w-12 h-12 bg-slate-100 text-slate-600 rounded-full flex items-center justify-center">
+                        <div class="w-12 h-12 bg-slate-800 text-cyan-400 rounded-full flex items-center justify-center">
                             <i class="ph ph-map-pin text-2xl"></i>
                         </div>
                         <div>
-                            <p class="text-sm text-slate-500">Location</p>
-                            <p class="text-lg font-medium text-slate-900">Wangsa Maju, Kuala Lumpur</p>
+                            <p class="text-sm text-slate-400">Location</p>
+                            <p class="text-lg font-medium text-white">Wangsa Maju, Kuala Lumpur</p>
                         </div>
                     </div>
                 </div>
@@ -167,18 +228,18 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-24 bg-white">
+    <section id="about" class="py-24 bg-slate-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col lg:flex-row gap-16 items-center">
-                
+
                 <div class="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/4 xl:w-1/5 mx-auto">
                     <div class="relative">
-                        <div class="absolute -inset-4 bg-gradient-to-r from-blue-500 to-cyan-400 opacity-30 rounded-[2rem] transform rotate-3"></div>
-                        <div class="absolute -inset-4 bg-gradient-to-r from-purple-500 to-blue-500 opacity-30 rounded-[2rem] transform -rotate-3"></div>
-                        
-                        <img 
-                            src="ac8240d3-aee7-4c22-bfc0-781985b8eb57.jpeg" 
-                            alt="Erfan Emil Profile" 
+                        <div class="absolute -inset-4 bg-gradient-to-r from-cyan-500 to-blue-400 opacity-40 rounded-[2rem] transform rotate-3"></div>
+                        <div class="absolute -inset-4 bg-gradient-to-r from-purple-500 to-cyan-500 opacity-40 rounded-[2rem] transform -rotate-3"></div>
+
+                        <img
+                            src="ac8240d3-aee7-4c22-bfc0-781985b8eb57.jpeg"
+                            alt="Erfan Emil Profile"
                             class="relative z-10 rounded-2xl shadow-xl w-full object-cover aspect-[4/5]"
                             onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop'"
                         />
@@ -186,25 +247,24 @@
                 </div>
 
                 <div class="w-full lg:w-7/12">
-                    <h3 class="text-blue-600 font-semibold tracking-wide uppercase text-sm mb-2">About Me</h3>
-                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6">Accounting Student & Tech Enthusiast</h2>
-                    <div class="h-1 w-16 bg-blue-600 rounded-full mb-8"></div>
-                    
-                    <div class="space-y-5 text-slate-600 text-lg leading-relaxed">
+                    <h3 class="text-cyan-400 font-semibold tracking-wide uppercase text-sm mb-2">About Me</h3>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Accounting Student & Tech Enthusiast</h2>
+                    <div class="h-1 w-16 hud-divider rounded-full mb-8"></div>
+
+                    <div class="space-y-5 text-slate-400 text-lg leading-relaxed">
                         <p>
                             Hi! I'm Erfan. My background is uniquely split between two worlds: business and technology. As an accounting student, I have a strong grasp of business logic, numbers, and operations. But my true passion has always been IT.
                         </p>
                         <p>
                             I currently work part-time in the IT sector, bridging the gap between my studies and real-world tech solutions. Whether it's developing websites, writing Python scripts to automate boring tasks, or troubleshooting systems, I love solving problems.
                         </p>
-                        
-                        <div class="bg-blue-50 border-l-4 border-blue-600 p-6 my-8 rounded-r-xl">
-                            <h4 class="text-xl font-bold text-[#0B1B3D] mb-2 flex items-center">
-                                <i class="ph ph-check-circle text-blue-600 mr-2 text-2xl"></i>
+
+                        <div class="bg-cyan-500/10 border-l-4 border-cyan-400 p-6 my-8 rounded-r-xl">
+                            <h4 class="text-xl font-bold text-white mb-2 flex items-center">
+                                <i class="ph ph-check-circle text-cyan-400 mr-2 text-2xl"></i>
                                 High Value, Competitive Rates
                             </h4>
-                            <!-- EDITED: New confident text -->
-                            <p class="text-slate-700 text-base">
+                            <p class="text-slate-300 text-base">
                                 I am actively building my professional portfolio with fresh, real-world projects, allowing me to offer highly competitive pricing. You get the dedicated attention and quality of a passionate developer, ensuring that the final product is truly worth your investment.
                             </p>
                         </div>
@@ -213,63 +273,63 @@
                     <div class="mt-10">
                         <h4 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">Core Tech Stack & Skills</h4>
                         <div class="flex flex-wrap gap-2">
-                            <span class="bg-slate-100 text-slate-700 px-4 py-2 rounded-lg text-sm font-medium border border-slate-200">Python</span>
-                            <span class="bg-slate-100 text-slate-700 px-4 py-2 rounded-lg text-sm font-medium border border-slate-200">HTML & CSS</span>
-                            <span class="bg-slate-100 text-slate-700 px-4 py-2 rounded-lg text-sm font-medium border border-slate-200">Web Development</span>
-                            <span class="bg-slate-100 text-slate-700 px-4 py-2 rounded-lg text-sm font-medium border border-slate-200">Automation Scripts</span>
-                            <span class="bg-slate-100 text-slate-700 px-4 py-2 rounded-lg text-sm font-medium border border-slate-200">Data Processing</span>
-                            <span class="bg-slate-100 text-slate-700 px-4 py-2 rounded-lg text-sm font-medium border border-slate-200">IT Support</span>
-                            <span class="bg-slate-100 text-slate-700 px-4 py-2 rounded-lg text-sm font-medium border border-slate-200">Hardware/Software Setup</span>
+                            <span class="bg-slate-800/60 text-cyan-300 px-4 py-2 rounded-lg text-sm font-medium border border-cyan-500/20">Python</span>
+                            <span class="bg-slate-800/60 text-cyan-300 px-4 py-2 rounded-lg text-sm font-medium border border-cyan-500/20">HTML & CSS</span>
+                            <span class="bg-slate-800/60 text-cyan-300 px-4 py-2 rounded-lg text-sm font-medium border border-cyan-500/20">Web Development</span>
+                            <span class="bg-slate-800/60 text-cyan-300 px-4 py-2 rounded-lg text-sm font-medium border border-cyan-500/20">Automation Scripts</span>
+                            <span class="bg-slate-800/60 text-cyan-300 px-4 py-2 rounded-lg text-sm font-medium border border-cyan-500/20">Data Processing</span>
+                            <span class="bg-slate-800/60 text-cyan-300 px-4 py-2 rounded-lg text-sm font-medium border border-cyan-500/20">IT Support</span>
+                            <span class="bg-slate-800/60 text-cyan-300 px-4 py-2 rounded-lg text-sm font-medium border border-cyan-500/20">Hardware/Software Setup</span>
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-24 bg-slate-50 border-t border-slate-100">
+    <section id="services" class="py-24 bg-slate-950 border-t border-cyan-500/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h3 class="text-blue-600 font-semibold tracking-wide uppercase text-sm mb-2">What I Do</h3>
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-900">How I Can Help You</h2>
-                <div class="mt-4 mx-auto w-16 h-1 bg-blue-600 rounded-full"></div>
+                <h3 class="text-cyan-400 font-semibold tracking-wide uppercase text-sm mb-2">What I Do</h3>
+                <h2 class="text-3xl md:text-4xl font-bold text-white">How I Can Help You</h2>
+                <div class="mt-4 mx-auto w-16 h-1 hud-divider rounded-full"></div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Web Dev Card -->
-                <div onclick="openModal('Website Development', 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop', 'Modern, responsive and user-friendly websites designed to grow your business and establish your digital presence.')" 
-                     class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-lg hover:-translate-y-2 transition-all duration-300 group cursor-pointer">
-                    <div class="w-14 h-14 bg-[#0B1B3D] text-blue-400 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <div onclick="openModal('Website Development', 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop', 'Modern, responsive and user-friendly websites designed to grow your business and establish your digital presence.')"
+                     class="hud-card p-8 rounded-2xl hover:-translate-y-2 transition-all duration-300 group cursor-pointer">
+                    <div class="w-14 h-14 bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                         <i class="ph ph-globe text-3xl"></i>
                     </div>
-                    <h4 class="text-xl font-bold text-slate-900 mb-3">Website Development</h4>
-                    <p class="text-slate-600 leading-relaxed">
+                    <h4 class="text-xl font-bold text-white mb-3">Website Development</h4>
+                    <p class="text-slate-400 leading-relaxed">
                         Modern, responsive and user-friendly websites designed to grow your business and establish your digital presence.
                     </p>
                 </div>
 
                 <!-- Python Card -->
-                <div onclick="openModal('Python Programming', 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?q=80&w=1200&auto=format&fit=crop', 'Custom Python solutions, scripting, and automation. I can help streamline your daily workflows and process data efficiently.')" 
-                     class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-lg hover:-translate-y-2 transition-all duration-300 group cursor-pointer">
-                    <div class="w-14 h-14 bg-[#0B1B3D] text-blue-400 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <div onclick="openModal('Python Programming', 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?q=80&w=1200&auto=format&fit=crop', 'Custom Python solutions, scripting, and automation. I can help streamline your daily workflows and process data efficiently.')"
+                     class="hud-card p-8 rounded-2xl hover:-translate-y-2 transition-all duration-300 group cursor-pointer">
+                    <div class="w-14 h-14 bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                         <i class="ph ph-code text-3xl"></i>
                     </div>
-                    <h4 class="text-xl font-bold text-slate-900 mb-3">Python Programming</h4>
-                    <p class="text-slate-600 leading-relaxed">
+                    <h4 class="text-xl font-bold text-white mb-3">Python Programming</h4>
+                    <p class="text-slate-400 leading-relaxed">
                         Custom Python solutions, scripting, and automation. I can help streamline your daily workflows and process data efficiently.
                     </p>
                 </div>
 
                 <!-- IT Services Card -->
-                <div onclick="openModal('IT Services & Support', 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop', 'Comprehensive troubleshooting, system setup, hardware/software maintenance, and technical support to keep you running smoothly.')" 
-                     class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-lg hover:-translate-y-2 transition-all duration-300 group cursor-pointer">
-                    <div class="w-14 h-14 bg-[#0B1B3D] text-blue-400 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <div onclick="openModal('IT Services & Support', 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop', 'Comprehensive troubleshooting, system setup, hardware/software maintenance, and technical support to keep you running smoothly.')"
+                     class="hud-card p-8 rounded-2xl hover:-translate-y-2 transition-all duration-300 group cursor-pointer">
+                    <div class="w-14 h-14 bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                         <i class="ph ph-monitor text-3xl"></i>
                     </div>
-                    <h4 class="text-xl font-bold text-slate-900 mb-3">IT Services & Support</h4>
-                    <p class="text-slate-600 leading-relaxed">
+                    <h4 class="text-xl font-bold text-white mb-3">IT Services & Support</h4>
+                    <p class="text-slate-400 leading-relaxed">
                         Comprehensive troubleshooting, system setup, hardware/software maintenance, and technical support to keep you running smoothly.
                     </p>
                 </div>
@@ -278,13 +338,13 @@
     </section>
 
     <!-- My Work / Portfolio Section -->
-    <section id="work" class="py-24 bg-white border-t border-slate-100">
+    <section id="work" class="py-24 bg-slate-900 border-t border-cyan-500/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h3 class="text-blue-600 font-semibold tracking-wide uppercase text-sm mb-2">Portfolio</h3>
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-900">My Work</h2>
-                <div class="mt-4 mx-auto w-16 h-1 bg-blue-600 rounded-full"></div>
-                <p class="mt-6 max-w-2xl mx-auto text-slate-600 text-lg">
+                <h3 class="text-cyan-400 font-semibold tracking-wide uppercase text-sm mb-2">Portfolio</h3>
+                <h2 class="text-3xl md:text-4xl font-bold text-white">My Work</h2>
+                <div class="mt-4 mx-auto w-16 h-1 hud-divider rounded-full"></div>
+                <p class="mt-6 max-w-2xl mx-auto text-slate-400 text-lg">
                     A look at real projects I've built for clients.
                 </p>
             </div>
@@ -292,13 +352,13 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Project: Clinical Reference App -->
                 <div onclick="openModal('Clinical Reference Web App', 'work-clinical-reference-app.jpeg', 'Built for a doctor client who wanted a digital &quot;clinical blue book&quot; &mdash; a fast, organized reference app covering Internal Medicine, Surgical, Paediatrics, Orthopaedics, O&amp;G, and Mnemonics, so they could quickly look up clinical notes on the go.')"
-                     class="bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-lg hover:-translate-y-2 transition-all duration-300 group cursor-pointer overflow-hidden">
+                     class="hud-card rounded-2xl hover:-translate-y-2 transition-all duration-300 group cursor-pointer overflow-hidden">
                     <div class="overflow-hidden h-48">
                         <img src="work-clinical-reference-app.jpeg" alt="Clinical Reference Web App" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                     </div>
                     <div class="p-6">
-                        <h4 class="text-xl font-bold text-slate-900 mb-2">Clinical Reference Web App</h4>
-                        <p class="text-slate-600 leading-relaxed text-sm">
+                        <h4 class="text-xl font-bold text-white mb-2">Clinical Reference Web App</h4>
+                        <p class="text-slate-400 leading-relaxed text-sm">
                             A digital "clinical blue book" built for a doctor, organizing key medical topics for quick reference.
                         </p>
                     </div>
@@ -308,22 +368,22 @@
     </section>
 
     <!-- Customer Reviews Section -->
-    <section id="reviews" class="py-24 bg-white border-t border-slate-100">
+    <section id="reviews" class="py-24 bg-slate-950 border-t border-cyan-500/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            
+
             <div class="text-center mb-16">
-                <h3 class="text-blue-600 font-semibold tracking-wide uppercase text-sm mb-2">Testimonials</h3>
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-900">What People Say</h2>
-                <div class="mt-4 mx-auto w-16 h-1 bg-blue-600 rounded-full"></div>
+                <h3 class="text-cyan-400 font-semibold tracking-wide uppercase text-sm mb-2">Testimonials</h3>
+                <h2 class="text-3xl md:text-4xl font-bold text-white">What People Say</h2>
+                <div class="mt-4 mx-auto w-16 h-1 hud-divider rounded-full"></div>
             </div>
 
-            <div id="reviewsLoading" class="text-center text-slate-400 py-8">Loading reviews&hellip;</div>
-            <div id="reviewsEmpty" class="hidden text-center text-slate-400 py-8">No reviews yet &mdash; be the first to leave one!</div>
+            <div id="reviewsLoading" class="text-center text-slate-500 py-8">Loading reviews&hellip;</div>
+            <div id="reviewsEmpty" class="hidden text-center text-slate-500 py-8">No reviews yet &mdash; be the first to leave one!</div>
             <div id="reviewsList" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
 
             <!-- Leave a Review Button -->
             <div class="mt-16 text-center">
-                <button onclick="openReviewModal()" class="inline-flex items-center space-x-2 bg-slate-900 hover:bg-blue-600 text-white px-8 py-3.5 rounded-xl font-medium transition-colors shadow-lg hover:shadow-xl hover:-translate-y-1 transform duration-300">
+                <button onclick="openReviewModal()" class="hud-btn-primary inline-flex items-center space-x-2 px-8 py-3.5 rounded-xl font-bold transition-all shadow-lg hover:-translate-y-1 transform duration-300">
                     <i class="ph ph-pencil-simple text-xl"></i>
                     <span>Leave a Review</span>
                 </button>
@@ -333,26 +393,26 @@
     </section>
 
     <!-- Value Proposition -->
-    <section class="bg-white py-12 border-t border-slate-100">
+    <section class="bg-slate-900 py-12 border-t border-cyan-500/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
-                <h3 class="text-2xl font-bold text-slate-900 text-center md:text-left">
-                    LET'S BUILD SOMETHING <span class="text-blue-600">GREAT</span> TOGETHER.
+                <h3 class="text-2xl font-bold text-white text-center md:text-left">
+                    LET'S BUILD SOMETHING <span class="text-cyan-400">GREAT</span> TOGETHER.
                 </h3>
-                
+
                 <div class="flex flex-wrap justify-center gap-6">
-                    <div class="flex items-center space-x-2 text-slate-600 font-medium">
-                        <i class="ph ph-shield-check text-blue-500 text-xl"></i>
+                    <div class="flex items-center space-x-2 text-slate-400 font-medium">
+                        <i class="ph ph-shield-check text-cyan-400 text-xl"></i>
                         <span>RELIABLE</span>
                     </div>
-                    <div class="text-slate-300">|</div>
-                    <div class="flex items-center space-x-2 text-slate-600 font-medium">
-                        <i class="ph ph-rocket-launch text-blue-500 text-xl"></i>
+                    <div class="text-slate-700">|</div>
+                    <div class="flex items-center space-x-2 text-slate-400 font-medium">
+                        <i class="ph ph-rocket-launch text-cyan-400 text-xl"></i>
                         <span>EFFICIENT</span>
                     </div>
-                    <div class="text-slate-300">|</div>
-                    <div class="flex items-center space-x-2 text-slate-600 font-medium">
-                        <i class="ph ph-check-circle text-blue-500 text-xl"></i>
+                    <div class="text-slate-700">|</div>
+                    <div class="flex items-center space-x-2 text-slate-400 font-medium">
+                        <i class="ph ph-check-circle text-cyan-400 text-xl"></i>
                         <span>PROFESSIONAL</span>
                     </div>
                 </div>
@@ -361,68 +421,68 @@
     </section>
 
     <!-- Footer / Contact -->
-    <footer id="contact" class="bg-[#0B1B3D] pt-16 pb-8 text-white">
+    <footer id="contact" class="bg-slate-950 pt-16 pb-8 text-white border-t border-cyan-500/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12 border-b border-slate-700 pb-12">
-                
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12 border-b border-slate-800 pb-12">
+
                 <!-- Contact Info & Map -->
                 <div>
                     <div class="flex items-center space-x-3 mb-6">
-                        <div class="text-blue-500 font-mono text-2xl font-bold tracking-tighter">
+                        <div class="text-cyan-400 font-mono text-2xl font-bold tracking-tighter">
                             &lt;<span class="text-white">/</span>&gt;
                         </div>
                         <div>
-                            <span class="text-blue-500 font-bold text-lg tracking-wider">EMIL</span>
-                            <span class="text-white font-semibold text-lg tracking-wider ml-2">TECH</span>
+                            <span class="text-cyan-400 font-orbitron font-bold text-lg tracking-wider">EMIL</span>
+                            <span class="text-white font-orbitron font-semibold text-lg tracking-wider ml-2">TECH</span>
                         </div>
                     </div>
                     <p class="text-slate-400 mb-8 max-w-sm">
                         Ready to start a project? I'm currently accepting new work. Reach out directly via WhatsApp or email to get a competitive quote!
                     </p>
-                    
+
                     <div class="space-y-6 mb-8">
-                        <a href="https://wa.me/60198162602" target="_blank" class="flex items-center space-x-4 text-slate-300 hover:text-green-400 transition-colors bg-slate-800/50 w-fit px-4 py-2 rounded-lg border border-slate-700">
+                        <a href="https://wa.me/60198162602" target="_blank" class="flex items-center space-x-4 text-slate-300 hover:text-green-400 transition-colors bg-slate-900/60 w-fit px-4 py-2 rounded-lg border border-cyan-500/20">
                             <i class="ph ph-whatsapp-logo text-green-500 text-2xl"></i>
                             <span class="font-medium">Chat on WhatsApp</span>
                         </a>
-                        
+
                         <a href="mailto:emilerfan91@gmail.com" class="flex items-center space-x-4 text-slate-300 hover:text-white transition-colors">
-                            <i class="ph ph-envelope text-blue-500 text-xl"></i>
+                            <i class="ph ph-envelope text-cyan-400 text-xl"></i>
                             <span>emilerfan91@gmail.com</span>
                         </a>
-                        
+
                         <div class="flex items-center space-x-4 text-slate-300">
-                            <i class="ph ph-map-pin text-blue-500 text-xl"></i>
+                            <i class="ph ph-map-pin text-cyan-400 text-xl"></i>
                             <span>Wangsa Maju, Kuala Lumpur</span>
                         </div>
                     </div>
 
                     <!-- Embedded Map -->
-                    <div class="rounded-xl overflow-hidden border border-slate-700 h-48 w-full shadow-inner bg-slate-800">
-                        <iframe 
+                    <div class="rounded-xl overflow-hidden border border-cyan-500/20 h-48 w-full shadow-inner bg-slate-900">
+                        <iframe
                             title="Wangsa Maju Map Location"
-                            width="100%" 
-                            height="100%" 
-                            style="border: 0;" 
-                            loading="lazy" 
-                            allowfullscreen 
+                            width="100%"
+                            height="100%"
+                            style="border: 0;"
+                            loading="lazy"
+                            allowfullscreen
                             src="https://maps.google.com/maps?q=Wangsa%20Maju,%20Kuala%20Lumpur&t=&z=13&ie=UTF8&iwloc=&output=embed">
                         </iframe>
                     </div>
                 </div>
 
                 <!-- Simple Contact Form -->
-                <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700 h-fit">
+                <div class="bg-slate-900/60 p-6 rounded-xl border border-cyan-500/20 h-fit">
                     <h4 class="text-xl font-bold mb-4">Send a Message</h4>
                     <!-- Form redirects to WhatsApp on submit -->
                     <form class="space-y-4" onsubmit="event.preventDefault(); window.open('https://wa.me/60198162602', '_blank');">
                         <div>
-                            <input type="text" placeholder="Your Name" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors" />
+                            <input type="text" placeholder="Your Name" required class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors" />
                         </div>
                         <div>
-                            <textarea placeholder="Tell me about your project..." required rows="4" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"></textarea>
+                            <textarea placeholder="Tell me about your project..." required rows="4" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors"></textarea>
                         </div>
-                        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 flex justify-center items-center text-white font-medium py-3 rounded-lg transition-colors mt-2">
+                        <button type="submit" class="hud-btn-primary w-full flex justify-center items-center font-bold py-3 rounded-lg transition-all mt-2">
                             <i class="ph ph-whatsapp-logo mr-2 text-lg"></i>
                             Continue to WhatsApp
                         </button>
@@ -430,7 +490,7 @@
                 </div>
 
             </div>
-            
+
             <div class="text-center text-slate-500 text-sm">
                 <p>&copy; <span id="year"></span> Emil Tech Solutions. All rights reserved.</p>
             </div>
@@ -440,16 +500,16 @@
     <!-- ========================================== -->
     <!-- SERVICE POP-UP (MODAL)                     -->
     <!-- ========================================== -->
-    <div id="serviceModal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-900/60 p-4 opacity-0 transition-opacity duration-300 backdrop-blur-sm">
-        <div id="modalContent" class="relative w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-2xl transition-all scale-95">
-            <button onclick="closeModal()" class="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/80 transition-colors backdrop-blur-md cursor-pointer">
+    <div id="serviceModal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 p-4 opacity-0 transition-opacity duration-300 backdrop-blur-sm">
+        <div id="modalContent" class="relative w-full max-w-2xl transform overflow-hidden rounded-2xl bg-slate-900 border border-cyan-500/30 shadow-[0_0_40px_rgba(34,211,238,0.15)] text-left align-middle transition-all scale-95">
+            <button onclick="closeModal()" class="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-slate-950/70 text-cyan-300 hover:bg-cyan-500/30 transition-colors backdrop-blur-md cursor-pointer">
                 <i class="ph ph-x text-xl"></i>
             </button>
             <img id="modalImage" src="" alt="Service Image" class="h-48 sm:h-72 w-full object-cover">
             <div class="p-8">
-                <h3 id="modalTitle" class="text-2xl font-bold text-[#0B1B3D] mb-4">Service Title</h3>
-                <div class="h-1 w-12 bg-blue-500 rounded-full mb-4"></div>
-                <p id="modalDesc" class="text-slate-600 text-lg leading-relaxed">Service description goes here.</p>
+                <h3 id="modalTitle" class="text-2xl font-bold text-white mb-4">Service Title</h3>
+                <div class="h-1 w-12 hud-divider rounded-full mb-4"></div>
+                <p id="modalDesc" class="text-slate-300 text-lg leading-relaxed">Service description goes here.</p>
             </div>
         </div>
     </div>
@@ -457,15 +517,15 @@
     <!-- ========================================== -->
     <!-- LEAVE A REVIEW POP-UP (MODAL)              -->
     <!-- ========================================== -->
-    <div id="reviewFormModal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-900/60 p-4 opacity-0 transition-opacity duration-300 backdrop-blur-sm">
-        <div id="reviewModalContent" class="relative w-full max-w-lg transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-2xl transition-all scale-95 p-8">
-            
-            <button onclick="closeReviewModal()" class="absolute right-4 top-4 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 transition-colors">
+    <div id="reviewFormModal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 p-4 opacity-0 transition-opacity duration-300 backdrop-blur-sm">
+        <div id="reviewModalContent" class="relative w-full max-w-lg transform overflow-hidden rounded-2xl bg-slate-900 border border-cyan-500/30 shadow-[0_0_40px_rgba(34,211,238,0.15)] text-left align-middle transition-all scale-95 p-8">
+
+            <button onclick="closeReviewModal()" class="absolute right-4 top-4 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-slate-800 text-slate-400 hover:bg-cyan-500/30 hover:text-cyan-300 transition-colors">
                 <i class="ph ph-x text-lg"></i>
             </button>
-            
-            <h3 class="text-2xl font-bold text-[#0B1B3D] mb-2">Write a Review</h3>
-            <p class="text-slate-500 text-sm mb-6">Share your experience! Your review will be posted publicly on this page right away.</p>
+
+            <h3 class="text-2xl font-bold text-white mb-2">Write a Review</h3>
+            <p class="text-slate-400 text-sm mb-6">Share your experience! Your review will be posted publicly on this page right away.</p>
 
             <form id="reviewForm" onsubmit="submitReview(event)" class="space-y-4">
 
@@ -474,13 +534,13 @@
 
                 <!-- Picture Upload Button UI -->
                 <div class="flex items-center justify-center w-full mb-2">
-                    <label class="flex flex-col items-center justify-center w-20 h-20 border-2 border-slate-300 border-dashed rounded-full cursor-pointer bg-slate-50 hover:bg-slate-100 transition-colors overflow-hidden relative group">
+                    <label class="flex flex-col items-center justify-center w-20 h-20 border-2 border-cyan-500/30 border-dashed rounded-full cursor-pointer bg-slate-800/50 hover:bg-slate-800 transition-colors overflow-hidden relative group">
                         <div id="reviewPicPreviewWrap" class="hidden absolute inset-0">
                             <img id="reviewPicPreview" class="w-full h-full object-cover" alt="" />
                         </div>
                         <div id="reviewPicPlaceholder" class="flex flex-col items-center justify-center pt-5 pb-6">
-                            <i class="ph ph-camera text-2xl text-slate-400 group-hover:text-blue-500 transition-colors"></i>
-                            <p class="text-[10px] text-slate-500 mt-1 font-medium group-hover:text-blue-500 transition-colors">Add Photo</p>
+                            <i class="ph ph-camera text-2xl text-slate-500 group-hover:text-cyan-400 transition-colors"></i>
+                            <p class="text-[10px] text-slate-500 mt-1 font-medium group-hover:text-cyan-400 transition-colors">Add Photo</p>
                         </div>
                         <input type="file" id="reviewPic" class="hidden" accept="image/*" onchange="previewReviewPic(event)" />
                     </label>
@@ -497,23 +557,23 @@
 
                 <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-1">Your Name</label>
-                        <input type="text" id="reviewName" required class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" placeholder="e.g. Ali" />
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Your Name</label>
+                        <input type="text" id="reviewName" required class="w-full bg-slate-800/60 border border-slate-700 rounded-lg px-4 py-2 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400" placeholder="e.g. Ali" />
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-1">Role / Company</label>
-                        <input type="text" id="reviewRole" required class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" placeholder="e.g. Business Owner" />
+                        <label class="block text-sm font-medium text-slate-300 mb-1">Role / Company</label>
+                        <input type="text" id="reviewRole" required class="w-full bg-slate-800/60 border border-slate-700 rounded-lg px-4 py-2 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400" placeholder="e.g. Business Owner" />
                     </div>
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">Your Review</label>
-                    <textarea id="reviewText" required rows="4" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" placeholder="Emil did a great job..."></textarea>
+                    <label class="block text-sm font-medium text-slate-300 mb-1">Your Review</label>
+                    <textarea id="reviewText" required rows="4" class="w-full bg-slate-800/60 border border-slate-700 rounded-lg px-4 py-2 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400" placeholder="Emil did a great job..."></textarea>
                 </div>
 
-                <p id="reviewFormError" class="hidden text-red-600 text-sm"></p>
+                <p id="reviewFormError" class="hidden text-red-400 text-sm"></p>
 
-                <button type="submit" id="reviewSubmitBtn" class="w-full bg-blue-600 hover:bg-blue-700 flex justify-center items-center text-white font-bold py-3 rounded-lg transition-colors mt-4 disabled:opacity-60 disabled:cursor-not-allowed">
+                <button type="submit" id="reviewSubmitBtn" class="hud-btn-primary w-full flex justify-center items-center font-bold py-3 rounded-lg transition-all mt-4 disabled:opacity-60 disabled:cursor-not-allowed">
                     <i class="ph ph-paper-plane-right mr-2 text-lg"></i>
                     <span id="reviewSubmitBtnText">Post Review</span>
                 </button>
@@ -583,13 +643,13 @@
             document.getElementById('modalTitle').innerText = title;
             document.getElementById('modalImage').src = imageSrc;
             document.getElementById('modalDesc').innerText = desc;
-            
+
             const modal = document.getElementById('serviceModal');
             const content = document.getElementById('modalContent');
-            
+
             modal.classList.remove('hidden');
             modal.classList.add('flex');
-            
+
             setTimeout(() => {
                 modal.classList.remove('opacity-0');
                 content.classList.remove('scale-95');
@@ -600,11 +660,11 @@
         function closeModal() {
             const modal = document.getElementById('serviceModal');
             const content = document.getElementById('modalContent');
-            
+
             modal.classList.add('opacity-0');
             content.classList.remove('scale-100');
             content.classList.add('scale-95');
-            
+
             setTimeout(() => {
                 modal.classList.add('hidden');
                 modal.classList.remove('flex');
@@ -657,10 +717,10 @@
             for(let i=1; i<=5; i++) {
                 const starIcon = document.getElementById(`star-${i}`);
                 if(i <= stars) {
-                    starIcon.classList.remove('ph', 'text-slate-300');
+                    starIcon.classList.remove('ph', 'text-slate-600');
                     starIcon.classList.add('ph-fill', 'text-yellow-400');
                 } else {
-                    starIcon.classList.add('ph', 'text-slate-300');
+                    starIcon.classList.add('ph', 'text-slate-600');
                     starIcon.classList.remove('ph-fill', 'text-yellow-400');
                 }
             }
@@ -683,11 +743,11 @@
 
         // --- LIVE REVIEWS: render cards from Firestore ---
         const AVATAR_COLORS = [
-            { bg: 'bg-blue-100', text: 'text-blue-600' },
-            { bg: 'bg-purple-100', text: 'text-purple-600' },
-            { bg: 'bg-green-100', text: 'text-green-600' },
-            { bg: 'bg-amber-100', text: 'text-amber-600' },
-            { bg: 'bg-rose-100', text: 'text-rose-600' },
+            { bg: 'bg-cyan-500/20', text: 'text-cyan-300' },
+            { bg: 'bg-purple-500/20', text: 'text-purple-300' },
+            { bg: 'bg-emerald-500/20', text: 'text-emerald-300' },
+            { bg: 'bg-amber-500/20', text: 'text-amber-300' },
+            { bg: 'bg-rose-500/20', text: 'text-rose-300' },
         ];
 
         function initialsFor(name) {
@@ -717,14 +777,14 @@
                 : `<div class="w-12 h-12 rounded-full ${color.bg} ${color.text} flex items-center justify-center font-bold text-lg">${escapeHtml(initialsFor(review.name))}</div>`;
 
             return `
-                <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 relative">
+                <div class="hud-card p-8 rounded-2xl relative">
                     <div class="flex text-yellow-400 mb-4 space-x-1">${starsHtml(review.rating)}</div>
-                    <p class="text-slate-700 leading-relaxed mb-6 italic">"${escapeHtml(review.text)}"</p>
+                    <p class="text-slate-300 leading-relaxed mb-6 italic">"${escapeHtml(review.text)}"</p>
                     <div class="flex items-center space-x-4 mt-auto">
                         ${avatar}
                         <div>
-                            <h4 class="font-bold text-slate-900 text-sm">${escapeHtml(review.name)}</h4>
-                            <p class="text-xs text-slate-500 uppercase tracking-wider">${escapeHtml(review.role)}</p>
+                            <h4 class="font-bold text-white text-sm">${escapeHtml(review.name)}</h4>
+                            <p class="text-xs text-slate-400 uppercase tracking-wider">${escapeHtml(review.role)}</p>
                         </div>
                     </div>
                 </div>`;
@@ -858,5 +918,3 @@
     </script>
 </body>
 </html>
-
-
