@@ -677,8 +677,8 @@
             let width, height, particles, animationId, resizeTimeout;
 
             function buildParticles() {
-                const density = width < 768 ? 18000 : 12000; // px^2 of screen per particle
-                const count = Math.min(90, Math.max(24, Math.floor((width * height) / density)));
+                const density = width < 768 ? 9000 : 6000; // px^2 of screen per particle
+                const count = Math.min(180, Math.max(50, Math.floor((width * height) / density)));
                 particles = Array.from({ length: count }, () => ({
                     x: Math.random() * width,
                     y: Math.random() * height,
@@ -695,7 +695,7 @@
 
             function drawFrame() {
                 ctx.clearRect(0, 0, width, height);
-                const maxDist = width < 768 ? 100 : 140;
+                const maxDist = width < 768 ? 130 : 180;
 
                 for (const p of particles) {
                     p.x += p.vx;
@@ -710,8 +710,8 @@
                         const dx = a.x - b.x, dy = a.y - b.y;
                         const dist = Math.sqrt(dx * dx + dy * dy);
                         if (dist < maxDist) {
-                            ctx.strokeStyle = `rgba(34, 211, 238, ${0.12 * (1 - dist / maxDist)})`;
-                            ctx.lineWidth = 1;
+                            ctx.strokeStyle = `rgba(34, 211, 238, ${0.28 * (1 - dist / maxDist)})`;
+                            ctx.lineWidth = 1.2;
                             ctx.beginPath();
                             ctx.moveTo(a.x, a.y);
                             ctx.lineTo(b.x, b.y);
@@ -721,9 +721,9 @@
                 }
 
                 for (const p of particles) {
-                    ctx.fillStyle = 'rgba(34, 211, 238, 0.5)';
+                    ctx.fillStyle = 'rgba(34, 211, 238, 0.8)';
                     ctx.beginPath();
-                    ctx.arc(p.x, p.y, 1.6, 0, Math.PI * 2);
+                    ctx.arc(p.x, p.y, 2.2, 0, Math.PI * 2);
                     ctx.fill();
                 }
             }
