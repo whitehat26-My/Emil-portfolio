@@ -1110,8 +1110,12 @@
                 await db.collection('reviews').add(reviewData);
                 localStorage.setItem('lastReviewSubmit', String(Date.now()));
 
-                // Notify the site owner via WhatsApp (the review itself is already saved above)
-                const whatsappMessage = `*NEW WEBSITE REVIEW!*%0A%0A*Name:* ${name}%0A*Role:* ${role}%0A*Rating:* ${currentRating} Stars ⭐️%0A*Review:* "${text}"`;
+                // Notify the site owner via WhatsApp (the review itself is already saved above).
+                // encodeURIComponent escapes the whole payload: a review containing "&" or "#"
+                // would otherwise cut the notification short at that character.
+                const whatsappMessage = encodeURIComponent(
+                    `*NEW WEBSITE REVIEW!*\n\n*Name:* ${name}\n*Role:* ${role}\n*Rating:* ${currentRating} Stars ⭐️\n*Review:* "${text}"`
+                );
                 const phone = "60198162602";
                 window.open(`https://wa.me/${phone}?text=${whatsappMessage}`, '_blank');
 
