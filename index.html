@@ -741,6 +741,19 @@
             console.error('Firebase failed to initialize:', err);
         }
 
+        // --- WHATSAPP CONTACT ---
+        // Single source of truth for the WhatsApp number (international format, no "+").
+        // The number also appears as a literal in the JSON-LD "telephone" field and in the
+        // "Chat on WhatsApp" link in the markup above — both of those have to work without
+        // JavaScript, so they can't read this constant. Update all three together.
+        const WHATSAPP_PHONE = "60198162602";
+
+        // Builds a wa.me link with the message escaped, so an "&" or "#" in user-supplied
+        // text can't cut the message short.
+        function whatsappLink(message) {
+            return `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(message)}`;
+        }
+
         // --- Animated particle network background ---
         (function() {
             const canvas = document.getElementById('particle-bg');
@@ -1110,14 +1123,10 @@
                 await db.collection('reviews').add(reviewData);
                 localStorage.setItem('lastReviewSubmit', String(Date.now()));
 
-                // Notify the site owner via WhatsApp (the review itself is already saved above).
-                // encodeURIComponent escapes the whole payload: a review containing "&" or "#"
-                // would otherwise cut the notification short at that character.
-                const whatsappMessage = encodeURIComponent(
+                // Notify the site owner via WhatsApp (the review itself is already saved above)
+                window.open(whatsappLink(
                     `*NEW WEBSITE REVIEW!*\n\n*Name:* ${name}\n*Role:* ${role}\n*Rating:* ${currentRating} Stars ⭐️\n*Review:* "${text}"`
-                );
-                const phone = "60198162602";
-                window.open(`https://wa.me/${phone}?text=${whatsappMessage}`, '_blank');
+                ), '_blank');
 
                 closeReviewModal();
                 document.getElementById('reviewForm').reset();
@@ -1155,11 +1164,9 @@
             if (!name || name.length > 60) return showContactFormError('Please enter a name (up to 60 characters).');
             if (!message || message.length > 1000) return showContactFormError('Please enter a message (up to 1000 characters).');
 
-            const phone = "60198162602";
-            const whatsappMessage = encodeURIComponent(
+            window.open(whatsappLink(
                 `*NEW ENQUIRY FROM EMILTECH.IT.COM*\n\n*Name:* ${name}\n*Message:* ${message}`
-            );
-            window.open(`https://wa.me/${phone}?text=${whatsappMessage}`, '_blank');
+            ), '_blank');
 
             document.getElementById('contactForm').reset();
         }
