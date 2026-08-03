@@ -619,14 +619,16 @@
                 <!-- Simple Contact Form -->
                 <div class="bg-slate-900/60 p-6 rounded-xl border border-cyan-500/20 h-fit">
                     <h4 class="text-xl font-bold mb-4">Send a Message</h4>
-                    <!-- Form redirects to WhatsApp on submit -->
-                    <form class="space-y-4" onsubmit="event.preventDefault(); window.open('https://wa.me/60198162602', '_blank');">
+                    <!-- Form opens WhatsApp with the visitor's name and message prefilled -->
+                    <form id="contactForm" class="space-y-4" onsubmit="sendContactMessage(event)">
                         <div>
-                            <input type="text" placeholder="Your Name" required class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors" />
+                            <input type="text" id="contactName" placeholder="Your Name" required class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors" />
                         </div>
                         <div>
-                            <textarea placeholder="Tell me about your project..." required rows="4" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors"></textarea>
+                            <textarea id="contactMessage" placeholder="Tell me about your project..." required rows="4" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors"></textarea>
                         </div>
+
+                        <p id="contactFormError" class="hidden text-red-400 text-sm"></p>
                         <button type="submit" class="hud-btn-primary w-full flex justify-center items-center font-bold py-3 rounded-lg transition-all mt-2">
                             <i class="ph ph-whatsapp-logo mr-2 text-lg"></i>
                             Continue to WhatsApp
@@ -1124,6 +1126,38 @@
                 submitBtn.disabled = false;
                 submitBtnText.textContent = 'Post Review';
             }
+        }
+
+        // --- CONTACT FORM ---
+        function showContactFormError(message) {
+            const el = document.getElementById('contactFormError');
+            el.textContent = message;
+            el.classList.remove('hidden');
+        }
+
+        function clearContactFormError() {
+            document.getElementById('contactFormError').classList.add('hidden');
+        }
+
+        // Hands the visitor off to WhatsApp with their name and message already typed out,
+        // so they don't have to repeat themselves once the chat opens.
+        function sendContactMessage(event) {
+            event.preventDefault();
+            clearContactFormError();
+
+            const name = document.getElementById('contactName').value.trim();
+            const message = document.getElementById('contactMessage').value.trim();
+
+            if (!name || name.length > 60) return showContactFormError('Please enter a name (up to 60 characters).');
+            if (!message || message.length > 1000) return showContactFormError('Please enter a message (up to 1000 characters).');
+
+            const phone = "60198162602";
+            const whatsappMessage = encodeURIComponent(
+                `*NEW ENQUIRY FROM EMILTECH.IT.COM*\n\n*Name:* ${name}\n*Message:* ${message}`
+            );
+            window.open(`https://wa.me/${phone}?text=${whatsappMessage}`, '_blank');
+
+            document.getElementById('contactForm').reset();
         }
     </script>
 </body>
