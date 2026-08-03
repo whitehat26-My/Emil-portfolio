@@ -719,8 +719,8 @@
     <!-- Scripts -->
     <script>
         // --- FIREBASE SETUP ---
-        // Replace these placeholder values with the config from YOUR Firebase project:
-        // Firebase Console -> Project settings -> General -> Your apps -> Web app.
+        // Live config for the "emil-tech-portfolio" project; backs the reviews collection.
+        // To look it up again: Firebase Console -> Project settings -> General -> Your apps -> Web app.
         // The apiKey below is not a secret — Firestore Security Rules (set in the
         // Firebase Console) are what actually control who can read/write data, not this key.
         const firebaseConfig = {
@@ -739,6 +739,19 @@
             db = firebase.firestore();
         } catch (err) {
             console.error('Firebase failed to initialize:', err);
+        }
+
+        // --- WHATSAPP CONTACT ---
+        // Single source of truth for the WhatsApp number (international format, no "+").
+        // The number also appears as a literal in the JSON-LD "telephone" field and in the
+        // "Chat on WhatsApp" link in the markup above — both of those have to work without
+        // JavaScript, so they can't read this constant. Update all three together.
+        const WHATSAPP_PHONE = "60198162602";
+
+        // Builds a wa.me link with the message escaped, so an "&" or "#" in user-supplied
+        // text can't cut the message short.
+        function whatsappLink(message) {
+            return `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(message)}`;
         }
 
         // --- Animated particle network background ---
@@ -1111,9 +1124,9 @@
                 localStorage.setItem('lastReviewSubmit', String(Date.now()));
 
                 // Notify the site owner via WhatsApp (the review itself is already saved above)
-                const whatsappMessage = `*NEW WEBSITE REVIEW!*%0A%0A*Name:* ${name}%0A*Role:* ${role}%0A*Rating:* ${currentRating} Stars ⭐️%0A*Review:* "${text}"`;
-                const phone = "60198162602";
-                window.open(`https://wa.me/${phone}?text=${whatsappMessage}`, '_blank');
+                window.open(whatsappLink(
+                    `*NEW WEBSITE REVIEW!*\n\n*Name:* ${name}\n*Role:* ${role}\n*Rating:* ${currentRating} Stars ⭐️\n*Review:* "${text}"`
+                ), '_blank');
 
                 closeReviewModal();
                 document.getElementById('reviewForm').reset();
@@ -1151,11 +1164,9 @@
             if (!name || name.length > 60) return showContactFormError('Please enter a name (up to 60 characters).');
             if (!message || message.length > 1000) return showContactFormError('Please enter a message (up to 1000 characters).');
 
-            const phone = "60198162602";
-            const whatsappMessage = encodeURIComponent(
+            window.open(whatsappLink(
                 `*NEW ENQUIRY FROM EMILTECH.IT.COM*\n\n*Name:* ${name}\n*Message:* ${message}`
-            );
-            window.open(`https://wa.me/${phone}?text=${whatsappMessage}`, '_blank');
+            ), '_blank');
 
             document.getElementById('contactForm').reset();
         }
