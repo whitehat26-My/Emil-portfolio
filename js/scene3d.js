@@ -9,6 +9,8 @@
 //
 // Parts 2 and 3 work even when WebGL or the Three.js CDN is unavailable.
 
+import { isLand } from './landmask.js';
+
 const STATION_IDS = ['home', 'about', 'duality', 'services', 'work', 'reviews', 'contact'];
 const STATION_NAMES = ['Home', 'About', 'Duality', 'Services', 'My Work', 'Reviews', 'Contact'];
 
@@ -308,9 +310,22 @@ async function initWorld() {
         globe.position.copy(P[0]);
         scene.add(globe);
 
+        // Earth's axial tilt, with the spinning globe inside it.
+        const tilt = new THREE.Group();
+        tilt.rotation.z = -0.41;
+        globe.add(tilt);
         const spin = new THREE.Group();
-        spin.rotation.z = 0.35;
-        globe.add(spin);
+        tilt.add(spin);
+
+        // Latitude/longitude (degrees) to a point on the globe. Longitude 0 faces +z.
+        const toVec = (lat, lon, r) => {
+            const la = THREE.MathUtils.degToRad(lat);
+            const lo = THREE.MathUtils.degToRad(lon);
+            return new THREE.Vector3(Math.cos(la) * Math.sin(lo) * r, Math.sin(la) * r, Math.cos(la) * Math.cos(lo) * r);
+        };
+        // Start with Kuala Lumpur facing the visitor.
+        const HOME = { lat: 3.139, lon: 101.687 };
+        const startRot = -THREE.MathUtils.degToRad(HOME.lon);
 
         // Dark core hides the dots on the far side, giving the globe a solid body.
         spin.add(new THREE.Mesh(
@@ -318,32 +333,47 @@ async function initWorld() {
             new THREE.MeshBasicMaterial({ color: 0x031426 }),
         ));
 
-        // Fibonacci-distributed dots; a cheap "noise" makes continent-like bright patches.
-        const n = small ? 1600 : 2600;
-        const pos = new Float32Array(n * 3);
-        const col = new Float32Array(n * 3);
-        const bright = new THREE.Color(CYAN);
-        const dim = new THREE.Color(0x0e3a4a);
-        const golden = Math.PI * (3 - Math.sqrt(5));
-        for (let i = 0; i < n; i++) {
-            const y = 1 - (i / (n - 1)) * 2;
-            const rr = Math.sqrt(1 - y * y);
-            const th = golden * i;
-            const x = Math.cos(th) * rr;
-            const z = Math.sin(th) * rr;
-            pos.set([x * R * 1.003, y * R * 1.003, z * R * 1.003], i * 3);
-            const land = Math.sin(x * 3.1 + 1.3) * Math.sin(y * 4.3 + 0.7) * Math.sin(z * 2.7 + 2.1)
-                + 0.45 * Math.sin(x * 7.0 + z * 5.0) * Math.sin(y * 6.0 - 1.2);
-            const c = land > 0.08 ? bright : dim;
-            col.set([c.r, c.g, c.b], i * 3);
+        // Evenly spread (Fibonacci) dots, kept bright on real land (js/landmask.js);
+        // a sparse, faint set marks the oceans.
+        {
+            const n = small ? 9000 : 16000;
+            const landPos = [];
+            const landCol = [];
+            const seaPos = [];
+            const c1 = new THREE.Color(CYAN);
+            const c2 = new THREE.Color(SKY);
+            const tmp = new THREE.Color();
+            const golden = Math.PI * (3 - Math.sqrt(5));
+            for (let i = 0; i < n; i++) {
+                const y = 1 - (i / (n - 1)) * 2;
+                const rr = Math.sqrt(1 - y * y);
+                const th = golden * i;
+                const x = Math.cos(th) * rr;
+                const z = Math.sin(th) * rr;
+                const lat = THREE.MathUtils.radToDeg(Math.asin(y));
+                const lon = THREE.MathUtils.radToDeg(Math.atan2(x, z));
+                if (isLand(lat, lon)) {
+                    landPos.push(x * R * 1.004, y * R * 1.004, z * R * 1.004);
+                    tmp.copy(c1).lerp(c2, Math.random() * 0.6);
+                    landCol.push(tmp.r, tmp.g, tmp.b);
+                } else if (i % 9 === 0) {
+                    seaPos.push(x * R * 1.002, y * R * 1.002, z * R * 1.002);
+                }
+            }
+            const landGeo = new THREE.BufferGeometry();
+            landGeo.setAttribute('position', new THREE.Float32BufferAttribute(landPos, 3));
+            landGeo.setAttribute('color', new THREE.Float32BufferAttribute(landCol, 3));
+            spin.add(new THREE.Points(landGeo, new THREE.PointsMaterial({
+                size: small ? 0.13 : 0.115, map: glowTex, vertexColors: true, transparent: true,
+                depthWrite: false, blending: THREE.AdditiveBlending,
+            })));
+            const seaGeo = new THREE.BufferGeometry();
+            seaGeo.setAttribute('position', new THREE.Float32BufferAttribute(seaPos, 3));
+            spin.add(new THREE.Points(seaGeo, new THREE.PointsMaterial({
+                size: 0.045, map: glowTex, color: 0x0b3a4a, transparent: true, opacity: 0.6,
+                depthWrite: false, blending: THREE.AdditiveBlending,
+            })));
         }
-        const dotsGeo = new THREE.BufferGeometry();
-        dotsGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-        dotsGeo.setAttribute('color', new THREE.BufferAttribute(col, 3));
-        spin.add(new THREE.Points(dotsGeo, new THREE.PointsMaterial({
-            size: 0.11, map: glowTex, vertexColors: true, transparent: true,
-            depthWrite: false, blending: THREE.AdditiveBlending,
-        })));
 
         // Latitude / longitude lines.
         {
@@ -369,7 +399,7 @@ async function initWorld() {
                     pts.push(new THREE.Vector3(Math.cos(a2) * Math.cos(th) * lr, Math.sin(a2) * lr, Math.cos(a2) * Math.sin(th) * lr));
                 }
             }
-            spin.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(pts), lineMat(CYAN, 0.1)));
+            spin.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(pts), lineMat(CYAN, 0.06)));
         }
 
         // Rim light on the globe and a soft atmosphere around it.
@@ -392,7 +422,7 @@ async function initWorld() {
                     varying vec3 vView;
                     void main() {
                         float f = pow(1.0 - max(dot(vNormal, vView), 0.0), 3.0);
-                        gl_FragColor = vec4(uColor, f * 0.9);
+                        gl_FragColor = vec4(uColor, f * 0.6);
                     }`,
                 uniforms: { uColor: { value: new THREE.Color(CYAN) } },
                 transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
@@ -415,19 +445,62 @@ async function initWorld() {
             }),
         ));
 
-        // Arcs between random points, drawn on like data packets.
+        // Kuala Lumpur pin: bright dot, short beam, pulsing ring and label.
+        const homeDir = toVec(HOME.lat, HOME.lon, 1);
+        const pin = new THREE.Group();
+        pin.position.copy(homeDir).multiplyScalar(R * 1.01);
+        pin.lookAt(homeDir.clone().multiplyScalar(R * 2));
+        spin.add(pin);
+        pin.add(new THREE.Mesh(new THREE.SphereGeometry(0.06, 12, 8), new THREE.MeshBasicMaterial({ color: 0xffffff })));
+        pin.add(glowSprite(CYAN, 0.9));
+        pin.add(new THREE.Line(
+            new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, 0, 0.75)]),
+            lineMat(CYAN, 0.9),
+        ));
+        const pinPulse = new THREE.Line(
+            new THREE.BufferGeometry().setFromPoints(circlePoints(1, 48).map((v) => new THREE.Vector3(v.x, v.z, 0))),
+            lineMat(CYAN, 0.9),
+        );
+        pin.add(pinPulse);
+        const pinLabel = textSprite('KUALA LUMPUR', '#67e8f9', 0.28);
+        pinLabel.position.set(0, 0.5, 0.35);
+        pin.add(pinLabel);
+
+        // Data arcs from Kuala Lumpur to real cities, drawn on like packets.
+        const cities = [
+            [35.68, 139.69], // Tokyo
+            [25.2, 55.27], // Dubai
+            [51.51, -0.13], // London
+            [-33.87, 151.21], // Sydney
+            [40.71, -74.0], // New York
+            [19.08, 72.88], // Mumbai
+            [37.57, 126.98], // Seoul
+            [37.77, -122.42], // San Francisco
+            [50.11, 8.68], // Frankfurt
+            [22.32, 114.17], // Hong Kong
+        ].slice(0, small ? 6 : 10);
         const arcs = [];
-        const unit = () => new THREE.Vector3().randomDirection();
-        for (let i = 0; i < (small ? 6 : 10); i++) {
-            const a = unit().multiplyScalar(R * 1.01);
-            const b = unit().multiplyScalar(R * 1.01);
-            if (a.distanceTo(b) < R * 0.6) { i--; continue; }
-            const mid = a.clone().add(b).normalize().multiplyScalar(R * (1.2 + a.distanceTo(b) / (R * 6)));
-            const pts = new THREE.QuadraticBezierCurve3(a, mid, b).getPoints(60);
-            const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), lineMat(i % 3 ? CYAN : PURPLE, 0.85));
+        const ARC_PTS = 64;
+        cities.forEach(([lat, lon], i) => {
+            const b = toVec(lat, lon, 1);
+            const angle = homeDir.angleTo(b);
+            const pts = [];
+            for (let k = 0; k <= ARC_PTS; k++) {
+                const t = k / ARC_PTS;
+                const dir = homeDir.clone().multiplyScalar(Math.sin((1 - t) * angle))
+                    .add(b.clone().multiplyScalar(Math.sin(t * angle)))
+                    .divideScalar(Math.sin(angle));
+                const alt = 1.012 + Math.sin(Math.PI * t) * (0.06 + 0.3 * (angle / Math.PI));
+                pts.push(dir.multiplyScalar(R * alt));
+            }
+            const color = i % 3 === 2 ? PURPLE : CYAN;
+            const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), lineMat(color, 0.9));
             spin.add(line);
-            arcs.push({ line, phase: Math.random() * 2, speed: 0.25 + Math.random() * 0.3 });
-        }
+            const dot = glowSprite(color, 0.35);
+            dot.position.copy(b).multiplyScalar(R * 1.01);
+            spin.add(dot);
+            arcs.push({ line, phase: i * 0.37, speed: 0.22 + (i % 4) * 0.06 });
+        });
 
         // Scan ring sweeping over the surface.
         const scan = circleLine(1, CYAN, 0.6);
@@ -457,13 +530,16 @@ async function initWorld() {
         }, { passive: true });
 
         updaters.push((t) => {
-            spin.rotation.y = t * 0.12;
+            spin.rotation.y = startRot + t * 0.06;
+            const pp = (t * 0.6) % 1;
+            pinPulse.scale.setScalar(0.15 + pp * 0.6);
+            pinPulse.material.opacity = 0.9 * (1 - pp);
             globe.rotation.x += (pointer.y * 0.35 - globe.rotation.x) * 0.05;
             globe.rotation.y += (pointer.x * 0.6 - globe.rotation.y) * 0.05;
 
             for (const arc of arcs) {
                 const p = (arc.phase + t * arc.speed) % 2;
-                const total = 61;
+                const total = ARC_PTS + 1;
                 const start = p > 1 ? Math.floor((p - 1) * total) : 0;
                 const end = p > 1 ? total : Math.floor(p * total);
                 arc.line.geometry.setDrawRange(start, Math.max(0, end - start));
