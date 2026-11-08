@@ -1,0 +1,15 @@
+// Cloudflare Workers config: serves this static site from Cloudflare's network.
+// Cloudflare (Workers Builds) runs `npx wrangler deploy` on every push to main.
+{
+  "name": "emil-portfolio",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    // The site files live at the repo root; .assetsignore keeps repo-only files out.
+    "directory": "./",
+    "binding": "ASSETS",
+    // Serve files exactly as named (no .html redirects), so the Google
+    // verification file keeps working. worker/index.js handles "/".
+    "html_handling": "none"
+  }
+}

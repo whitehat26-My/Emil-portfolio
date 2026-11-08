@@ -1,0 +1,10 @@
+# Security and caching headers added by Cloudflare to every response.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  Strict-Transport-Security: max-age=31536000
+
+/js/*
+  Cache-Control: public, max-age=3600, must-revalidate

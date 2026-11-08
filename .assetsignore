@@ -1,0 +1,12 @@
+# Files that are part of the repo but should not be published to the website.
+.git
+.github
+.claude
+node_modules
+.wrangler
+wrangler.jsonc
+.assetsignore
+README.md
+CNAME
+worker
+.gitignore
