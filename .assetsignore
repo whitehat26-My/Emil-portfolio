@@ -10,3 +10,8 @@ README.md
 CNAME
 worker
 .gitignore
+package.json
+package-lock.json
+tailwind.config.js
+css/tailwind.input.css
+vendor/README.md

@@ -164,7 +164,7 @@ async function initWorld() {
     const probe = document.createElement('canvas');
     if (!(probe.getContext('webgl2') || probe.getContext('webgl'))) return null;
 
-    const THREE = await import('three');
+    const THREE = await import('../vendor/three/three.module.min.js');
 
     const CYAN = 0x22d3ee;
     const SKY = 0x38bdf8;

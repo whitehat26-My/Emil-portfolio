@@ -1,12 +1,26 @@
 # Security and caching headers added by Cloudflare to every response.
+#
+# Content-Security-Policy: scripts may only come from this site (plus Cloudflare's own
+# analytics beacon); no inline scripts or onclick="" handlers are allowed. Inline styles are
+# allowed because a few elements use style="" attributes. Firebase talks to
+# firestore.googleapis.com; the contact map is a Google Maps iframe; service pop-ups use
+# Unsplash photos.
 /*
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://images.unsplash.com; connect-src 'self' https://firestore.googleapis.com https://cloudflareinsights.com; frame-src https://maps.google.com https://www.google.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests
+  Cross-Origin-Opener-Policy: same-origin
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: SAMEORIGIN
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
   Strict-Transport-Security: max-age=31536000
 
-# Browsers re-check scripts on every visit (a cheap 304 when unchanged),
+# Browsers re-check these on every visit (a cheap 304 when unchanged),
 # so site updates show up straight away.
 /js/*
+  Cache-Control: no-cache
+
+/css/*
+  Cache-Control: no-cache
+
+/vendor/*
   Cache-Control: no-cache
